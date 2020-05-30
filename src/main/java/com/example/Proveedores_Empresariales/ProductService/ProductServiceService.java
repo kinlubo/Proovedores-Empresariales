@@ -1,8 +1,10 @@
 package com.example.Proveedores_Empresariales.ProductService;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-@org.springframework.stereotype.Service
+@Service
 public interface ProductServiceService {
 
     public ProductService save (ProductService productService);

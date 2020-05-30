@@ -25,9 +25,10 @@ public class ProductWholesalerServiceimp implements ProductWholesalerService {
     }
 
     @Override
-    public ProductWholesaler getById(int id) {
-        return this.repositoryProductWholesaler.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
+    public ProductWholesaler getById(ProductWhoPK productWhoPK) {
+        return this.repositoryProductWholesaler.findByIdProducto(productWhoPK);
     }
+
 
     @Override
     public ProductWholesaler update(ProductWholesaler productWholesaler) {

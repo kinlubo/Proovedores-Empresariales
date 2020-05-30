@@ -24,9 +24,4 @@ public class Country implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-
-    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "contry")
-    private Collection<Departament> departamentCollection;
-
-     */
 }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+
 
 
 @Entity
@@ -16,9 +16,8 @@ import java.sql.Date;
 @NoArgsConstructor
 public class ProductWholesaler implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected ProductWholesalerPK productWholesalerPK;
+    private ProductWhoPK idProducto;
     @Basic(optional = false)
     @Column(name = "quantity_final")
     private int quantityFinal;

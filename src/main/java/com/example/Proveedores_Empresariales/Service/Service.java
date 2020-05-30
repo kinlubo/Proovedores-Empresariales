@@ -24,8 +24,5 @@ public class Service implements Serializable {
     @Basic(optional = false)
     private String plan;
     @Basic(optional = false)
-    @Temporal(TemporalType.TIME)
     private Date duration;
-/*    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
-    private Collection<ProductService> productServiceCollection;*/
 }

@@ -1,10 +1,11 @@
 package com.example.Proveedores_Empresariales.ProductService;
 
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@org.springframework.stereotype.Service
+@Service
 public class ProductServiceServiceimp implements ProductServiceService {
 
     private RepositoryProductService repositoryProductService;

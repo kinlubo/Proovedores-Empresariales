@@ -23,11 +23,7 @@ public class City implements Serializable {
     private int code;
     @Basic(optional = false)
     private String name;
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    private Collection<BranchOfficeCompan> branchOfficeCompanCollection;
-     */
     @ManyToOne(optional = false)
     private Departament departament;
 
-}
+    }

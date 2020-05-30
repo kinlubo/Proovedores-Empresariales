@@ -9,7 +9,7 @@ public interface ProductWholesalerService {
 
     public List<ProductWholesaler> getAll();
 
-    public ProductWholesaler getById(int id);
+    public ProductWholesaler getById(ProductWhoPK productWhoPK);
 
     public ProductWholesaler update(ProductWholesaler productWholesaler);
 

@@ -26,10 +26,5 @@ public class Company implements Serializable {
     private int phone;
     @Basic(optional = false)
     private String direction;
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-    private Collection<BranchOfficeCompan> branchOfficeCompanCollection;
-     */
-
 }
 
