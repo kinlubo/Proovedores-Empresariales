@@ -70,7 +70,7 @@ public class DepartmentRestController {
         }
         else {
             departament.setName(nombre);
-            departament.setContry(countryId(country));
+            departament.setCountry(countryId(country));
 
         }
         return new ResponseEntity<>(this.departmentService.update(departament), HttpStatus.OK);

@@ -1,5 +1,7 @@
 package com.example.Proveedores_Empresariales.ProductWholesaler;
 
+import com.example.Proveedores_Empresariales.BranchOfficeCompan.BranchOfficeCompan;
+import com.example.Proveedores_Empresariales.ProductService.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ public class ProductWholesaler implements Serializable {
     private int quantityFinal;
     @Basic(optional = false)
     private int value;
-    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "productWholesaler")
-    private Collection<ProductService> productServiceCollection;*/
+    @ManyToOne(optional = true)
+    private ProductService productService;
+
 }

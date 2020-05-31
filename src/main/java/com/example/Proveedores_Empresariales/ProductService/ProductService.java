@@ -38,9 +38,9 @@ public class ProductService implements Serializable {
     @JoinColumn(name = "product_id")
     @OneToOne(optional = true)
     private Product product;
-    @OneToOne(optional = true)
-    private ProductWholesaler productWholesaler;
     @JoinColumn(name = "branchoffice_company_nic")
     @ManyToOne(optional = true)
     private BranchOfficeCompan branchOfficeCompan;
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "productWholesaler")
+    private Collection<ProductService> productServiceCollection;*/
 }

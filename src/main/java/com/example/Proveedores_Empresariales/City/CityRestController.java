@@ -41,10 +41,9 @@ public class CityRestController {
     }
 
     @PostMapping
-    public ResponseEntity<City> save(@RequestBody Integer id,int code,String nombre, Integer departmentid)
+    public ResponseEntity<City> save(@RequestBody City city)
     {
-        Departament departament= departamentId(departmentid);
-        City city = new City(id,code,nombre,departament);
+        //Departament departament= departamentId(departmentid);
         return ResponseEntity.ok().body(this.cityService.save(city));
     }
 

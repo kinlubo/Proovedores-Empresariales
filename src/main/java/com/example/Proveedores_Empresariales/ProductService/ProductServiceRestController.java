@@ -76,22 +76,15 @@ public class ProductServiceRestController {
         }
         return  branchOfficeCompan;
     }
-    public ProductWholesaler  productWholesalerId(int code, int quan)
-    {
-        ProductWhoPK productWhoPK = new ProductWhoPK(code,quan);
-        ProductWholesaler productWholesaler = this.productWholesalerService.getById(productWhoPK);
 
-        return  productWholesaler;
-    }
     @PostMapping
     public ResponseEntity<ProductService> save(@RequestBody Integer id,int code,String name,int value,int unitMeasure,
-            Integer serviceId,Integer productId,int codeProductWholesaler,int quantityPorductWholesaler,Integer branchOfficeCompanId)
+            Integer serviceId,Integer productId,Integer branchOfficeCompanId)
     {
         Service service = serviceId(serviceId);
         Product product = productId(productId);
-        ProductWholesaler productWholesaler = productWholesalerId(codeProductWholesaler,quantityPorductWholesaler);
         BranchOfficeCompan branchOfficeCompan = branchOfficeCompanId(branchOfficeCompanId);
-        ProductService productService  = new ProductService(id,code,name,value,unitMeasure,service,product,productWholesaler,branchOfficeCompan);
+        ProductService productService  = new ProductService(id,code,name,value,unitMeasure,service,product,branchOfficeCompan);
         return ResponseEntity.ok().body(this.productServiceService.save(productService));
     }
 

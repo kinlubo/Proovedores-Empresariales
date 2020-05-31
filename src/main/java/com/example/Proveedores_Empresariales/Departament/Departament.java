@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "departament")
@@ -25,13 +26,9 @@ public class Departament implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departament")
-    private Collection<City> cityCollection;
-     */
-
-    @ManyToOne(optional = false)
-    private Country contry;
+    @ManyToOne
+    @JoinColumn(name = "country", nullable = false)
+    private Country country;
 
 
 

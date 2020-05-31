@@ -1,5 +1,8 @@
 package com.example.Proveedores_Empresariales.ProductWholesaler;
 
+import com.example.Proveedores_Empresariales.Product.Product;
+import com.example.Proveedores_Empresariales.ProductService.ProductService;
+import com.example.Proveedores_Empresariales.ProductService.ProductServiceService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -7,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("api/v1/ProductWholesaler")
@@ -15,19 +17,32 @@ import java.util.List;
 public class ProductWholesalerRestController {
 
     private ProductWholesalerService productWholesalerService;
-    private RepositoryProductWholesaler repositoryProductWholesaler;
+    private ProductServiceService productServiceService;
 
-    public ProductWholesalerRestController(ProductWholesalerService productWholesalerService, RepositoryProductWholesaler repositoryProductWholesaler) {
+    public ProductWholesalerRestController(ProductWholesalerService productWholesalerService, RepositoryProductWholesaler repositoryProductWholesaler, ProductServiceService productServiceService) {
         this.productWholesalerService = productWholesalerService;
-        this.repositoryProductWholesaler = repositoryProductWholesaler;
+        this.productServiceService = productServiceService;
+    }
+    public ProductService productService(Integer id)
+    {
+        ProductService productService = null;
+        List<ProductService>productServices=productServiceService.getAll();
+        for(int i = 0 ;productServices.size()>i; i++)
+        {
+            if(productServices.get(i).getId()==id)
+            {
+                productService = productServices.get(i);
+            }
+        }
+        return productService;
     }
 
-
     @PostMapping
-    public ResponseEntity<ProductWholesaler> save(@RequestBody Integer code ,Integer qualityIntial, int qualityFinal, int value)
+    public ResponseEntity<ProductWholesaler> save(@RequestBody Integer code ,Integer qualityIntial, int qualityFinal, int value,Integer producServiceId)
     {
         ProductWhoPK productWholesalerPK = new ProductWhoPK(code, qualityIntial);
-        ProductWholesaler productWholesaler  = new ProductWholesaler(productWholesalerPK,qualityFinal,value);
+        ProductService productService = productService(producServiceId);
+        ProductWholesaler productWholesaler  = new ProductWholesaler(productWholesalerPK,qualityFinal,value,productService);
         return ResponseEntity.ok().body(this.productWholesalerService.save(productWholesaler));
     }
 
@@ -50,7 +65,7 @@ public class ProductWholesalerRestController {
             @ApiResponse(code = 404, message = "Programa no encontrado") })
     public ResponseEntity<ProductWholesaler> update(@PathVariable("identificacion") Integer code ,Integer qualityIntial, int qualityFinal, int value) {
         ProductWhoPK productWhoPK = new ProductWhoPK(code,qualityIntial);
-        ProductWholesaler productWholesaler= this.repositoryProductWholesaler.findByIdProducto(productWhoPK);
+        ProductWholesaler productWholesaler= this.productWholesalerService.getById(productWhoPK);
         if ( productWholesaler== null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -71,7 +86,7 @@ public class ProductWholesalerRestController {
             @ApiResponse(code = 404, message = "Programa no encontrado") })
     public void remove(@PathVariable("identificacion")int code, int quentityInitial) {
         ProductWhoPK productWhoPK = new ProductWhoPK(code,quentityInitial);
-        ProductWholesaler productWholesaler= this.repositoryProductWholesaler.findByIdProducto(productWhoPK);
+        ProductWholesaler productWholesaler= this.productWholesalerService.getById(productWhoPK);
         if ( productWholesaler!= null) {
             this.productWholesalerService.delete(productWholesaler);
         }
