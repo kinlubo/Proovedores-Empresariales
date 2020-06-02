@@ -9,10 +9,7 @@ import com.example.Proveedores_Empresariales.Country.CountryService;
 import com.example.Proveedores_Empresariales.Departament.Departament;
 import com.example.Proveedores_Empresariales.Departament.DepartmentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -125,5 +122,12 @@ public class BranchOfficeAllRestController {
         Company company = companyId(companyId);
         branchOfficeCompan =  new BranchOfficeCompan(nic,name,phone,mail,diretion,city,company);
         return ResponseEntity.ok().body(this.branchOfficeCompanService.save(branchOfficeCompan));
+    }
+
+    @PostMapping(path = "/{id}")
+    public ResponseEntity<Company> save(@RequestBody @PathVariable("id") Integer nic, String name, String mail, int phone, String direccion)
+    {
+        Company company = new Company(nic,name,mail,phone,direccion);
+        return ResponseEntity.ok().body(this.companyService.save(company));
     }
 }

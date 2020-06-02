@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
 import java.util.List;
 
 @RequestMapping("api/v1/productserviceall")
@@ -74,8 +75,21 @@ public class ProductServiceAllRestControler {
 
     @PostMapping
     public ResponseEntity<ProductService> save(@RequestBody Integer id, int code, String name, int value, int unitMeasure,
-                                               Integer serviceId, Integer productId, Integer branchOfficeCompanId)
+                                               Integer serviceId, Integer productId, Integer branchOfficeCompanId, String presentationProduct, int quantityProduct, String planService, Date durationService)
     {
+        int varid = this.serviceService.getAll().size()+1;
+        int varidpr = this.productService.getAll().size()+1;
+        if  (serviceId(serviceId)==null)
+        {
+
+            Service service = new Service(varid,planService,durationService);
+            this.serviceService.save(service);
+        }
+        if(productId(productId)==null)
+        {
+            Product product = new Product(varidpr,presentationProduct,quantityProduct);
+            this.productService.save(product);
+        }
         Service service = serviceId(serviceId);
         Product product = productId(productId);
         BranchOfficeCompan branchOfficeCompan = branchOfficeCompanId(branchOfficeCompanId);
