@@ -41,9 +41,8 @@ public class OrderInventaryRestController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderInventory> save(@RequestBody Integer identification, Date date, int numberOrderInventary, String responsable, Date dateMaximumDeliveryInventory )
+    public ResponseEntity<OrderInventory> save(@RequestBody OrderInventory orderInventory )
     {
-        OrderInventory orderInventory  = new OrderInventory(identification,date,numberOrderInventary,responsable,dateMaximumDeliveryInventory);
         return ResponseEntity.ok().body(this.orderInventaryService.save(orderInventory));
     }
 
@@ -63,23 +62,11 @@ public class OrderInventaryRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<OrderInventory> update(@PathVariable("identificacion")Integer identification, Date date, int numberOrderInventary,
-                                                 String responsable, Date dateMaximumDeliveryInventory )
+    public ResponseEntity<OrderInventory> update(@PathVariable("identificacion")Integer identification,@RequestBody OrderInventory orderInventory )
     {
 
-        OrderInventory orderInventory= this.orderInventaryService.getById(identification);
-        if ( orderInventory== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            orderInventory.setIdentification(identification);
-            orderInventory.setDate(date);
-            orderInventory.setNumberOrderInventory(numberOrderInventary);
-            orderInventory.setResponsable(responsable);
-            orderInventory.setDateMaximumDeliveryInventory(dateMaximumDeliveryInventory);
 
-        }
-        return new ResponseEntity<>(this.orderInventaryService.update(orderInventory), HttpStatus.OK);
+        return new ResponseEntity<>(this.orderInventaryService.update(identification,orderInventory), HttpStatus.OK);
 
     }
 

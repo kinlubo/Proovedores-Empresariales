@@ -10,9 +10,11 @@ import java.util.List;
 public class DetailPetitionServiceimp implements DetailPetitionService {
 
     private RepositoryDetailPetition repositoryDetailPetition;
+    private DetailPetition detailPetition1;
 
     public DetailPetitionServiceimp(RepositoryDetailPetition repositoryDetailPetition) {
         this.repositoryDetailPetition = repositoryDetailPetition;
+        detailPetition1 = null;
     }
 
 
@@ -32,8 +34,13 @@ public class DetailPetitionServiceimp implements DetailPetitionService {
     }
 
     @Override
-    public DetailPetition update(DetailPetition detailPetition) {
-        return this.repositoryDetailPetition.save(detailPetition);
+    public DetailPetition update(int id,DetailPetition detailPetition) {
+        detailPetition1 = getById(id);
+        detailPetition1.setRawMaterials(detailPetition.getRawMaterials());
+        detailPetition1.setOrderInventory(detailPetition.getOrderInventory());
+        detailPetition1.setQuantity(detailPetition.getQuantity());
+        detailPetition1.setProduct(detailPetition.getProduct());
+        return this.repositoryDetailPetition.save(detailPetition1);
     }
 
     @Override

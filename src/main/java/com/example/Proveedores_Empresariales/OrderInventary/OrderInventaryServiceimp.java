@@ -2,6 +2,7 @@ package com.example.Proveedores_Empresariales.OrderInventary;
 
 import com.example.Proveedores_Empresariales.Departament.Departament;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 public class OrderInventaryServiceimp implements OrderInventaryService {
 
     private RepositoryOrderInventary repositoryOrderInventary;
+    private OrderInventory orderInventory;
 
     public OrderInventaryServiceimp(RepositoryOrderInventary repositoryOrderInventary) {
         this.repositoryOrderInventary = repositoryOrderInventary;
+        this.orderInventory = null;
     }
 
 
@@ -32,8 +35,11 @@ public class OrderInventaryServiceimp implements OrderInventaryService {
     }
 
     @Override
-    public OrderInventory update(OrderInventory orderInventory) {
-        return this.repositoryOrderInventary.save(orderInventory);
+    public OrderInventory update(int id,OrderInventory orderInventory) {
+        OrderInventory orderInventory1 = getById(id);
+        orderInventory1 = orderInventory;
+        orderInventory1.setIdentification(id);
+        return this.repositoryOrderInventary.save(orderInventory1);
     }
 
     @Override

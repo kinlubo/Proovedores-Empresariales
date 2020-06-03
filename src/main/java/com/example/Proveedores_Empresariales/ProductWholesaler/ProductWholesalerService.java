@@ -11,7 +11,7 @@ public interface ProductWholesalerService {
 
     public ProductWholesaler getById(ProductWhoPK productWhoPK);
 
-    public ProductWholesaler update(ProductWholesaler productWholesaler);
+    public ProductWholesaler update( ProductWhoPK productWhoPK,ProductWholesaler productWholesaler);
 
     public void delete (ProductWholesaler productWholesaler);
 }

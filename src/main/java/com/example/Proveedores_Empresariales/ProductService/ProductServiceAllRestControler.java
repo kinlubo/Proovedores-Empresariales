@@ -3,7 +3,12 @@ package com.example.Proveedores_Empresariales.ProductService;
 import com.example.Proveedores_Empresariales.BranchOfficeCompan.BranchOfficeCompan;
 import com.example.Proveedores_Empresariales.BranchOfficeCompan.BranchOfficeCompanService;
 import com.example.Proveedores_Empresariales.Product.Product;
+import com.example.Proveedores_Empresariales.ProductService_RawMaterial.ProductService_RawMaterial;
+import com.example.Proveedores_Empresariales.ProductService_RawMaterial.ProductService_RawMaterialPK;
+import com.example.Proveedores_Empresariales.ProductService_RawMaterial.ProductService_RawMaterialService;
 import com.example.Proveedores_Empresariales.ProductWholesaler.ProductWholesalerService;
+import com.example.Proveedores_Empresariales.RawMaterials.RawMaterials;
+import com.example.Proveedores_Empresariales.RawMaterials.RawMaterialsService;
 import com.example.Proveedores_Empresariales.Service.Service;
 import com.example.Proveedores_Empresariales.Service.ServiceService;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +28,18 @@ public class ProductServiceAllRestControler {
     private com.example.Proveedores_Empresariales.Product.ProductService productService;
     private BranchOfficeCompanService branchOfficeCompanService;
     private ProductWholesalerService productWholesalerService ;
+    private RawMaterialsService rawMaterialsService;
+    private ProductService_RawMaterialService productService_rawMaterialService;
     
-    public ProductServiceAllRestControler(ProductServiceService productServiceService, ServiceService serviceService, com.example.Proveedores_Empresariales.Product.ProductService productService, BranchOfficeCompanService branchOfficeCompanService, ProductWholesalerService productWholesalerService) {
+    public ProductServiceAllRestControler(ProductServiceService productServiceService, ServiceService serviceService,
+                                            com.example.Proveedores_Empresariales.Product.ProductService productService, BranchOfficeCompanService branchOfficeCompanService, ProductWholesalerService productWholesalerService, RawMaterialsService rawMaterialsService, ProductService_RawMaterialService productService_rawMaterialService) {
         this.productServiceService = productServiceService;
         this.serviceService = serviceService;
         this.productService = productService;
         this.branchOfficeCompanService = branchOfficeCompanService;
         this.productWholesalerService = productWholesalerService;
+        this.rawMaterialsService = rawMaterialsService;
+        this.productService_rawMaterialService = productService_rawMaterialService;
     }
 
 
@@ -73,6 +83,21 @@ public class ProductServiceAllRestControler {
         return  branchOfficeCompan;
     }
 
+    public RawMaterials rawMaterials (String name)
+    {
+        RawMaterials rawMaterials = null;
+        List<RawMaterials> rawMaterialsList = this.rawMaterialsService.getAll();
+        for (int i = 0; rawMaterialsList.size()>i;i++)
+        {
+            if(rawMaterialsList.get(i).getName().equalsIgnoreCase(name))
+            {
+                rawMaterials = rawMaterialsList.get(i);
+            }
+        }
+
+        return rawMaterials;
+    }
+
     @PostMapping
     public ResponseEntity<ProductService> save(@RequestBody Integer id, int code, String name, int value, int unitMeasure,
                                                Integer serviceId, Integer productId, Integer branchOfficeCompanId, String presentationProduct, int quantityProduct, String planService, Date durationService)
@@ -90,6 +115,10 @@ public class ProductServiceAllRestControler {
             Product product = new Product(varidpr,presentationProduct,quantityProduct);
             this.productService.save(product);
         }
+        int varRaw = rawMaterials(name).getCode();
+        ProductService_RawMaterialPK productService_rawMaterialPK = new ProductService_RawMaterialPK(id,varRaw);
+        ProductService_RawMaterial productService_rawMaterial = new ProductService_RawMaterial(productService_rawMaterialPK);
+        this.productService_rawMaterialService.save(productService_rawMaterial);
         Service service = serviceId(serviceId);
         Product product = productId(productId);
         BranchOfficeCompan branchOfficeCompan = branchOfficeCompanId(branchOfficeCompanId);

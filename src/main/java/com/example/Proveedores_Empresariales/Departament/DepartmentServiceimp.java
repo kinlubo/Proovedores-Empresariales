@@ -32,8 +32,11 @@ public class DepartmentServiceimp implements DepartmentService {
     }
 
     @Override
-    public Departament update(Departament departament) {
-        return this.repositoryDepartment.save(departament);
+    public Departament update(int id,Departament departament) {
+        Departament departament1 = getById(id);
+        departament1.setName(departament.getName());
+
+        return this.repositoryDepartment.save(departament1);
     }
 
     @Override

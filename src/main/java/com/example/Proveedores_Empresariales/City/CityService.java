@@ -14,7 +14,7 @@ public interface CityService {
 
     public City getById(int id);
 
-    public City update(City city);
+    public City update( int id,City city);
 
     public void delete (City city);
 }

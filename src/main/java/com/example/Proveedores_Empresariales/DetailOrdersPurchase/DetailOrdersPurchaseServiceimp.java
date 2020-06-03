@@ -10,9 +10,11 @@ import java.util.List;
 public class DetailOrdersPurchaseServiceimp implements DetailOrdersPurchaseService {
 
     private RepositoryDetailOrdersPurchase repositoryDetailOrdersPurchase;
+    private DetailOrdersPurchase detailOrdersPurchase1;
 
     public DetailOrdersPurchaseServiceimp(RepositoryDetailOrdersPurchase repositoryDetailOrdersPurchase) {
         this.repositoryDetailOrdersPurchase = repositoryDetailOrdersPurchase;
+        detailOrdersPurchase1 = null;
     }
 
 
@@ -32,8 +34,15 @@ public class DetailOrdersPurchaseServiceimp implements DetailOrdersPurchaseServi
     }
 
     @Override
-    public DetailOrdersPurchase update(DetailOrdersPurchase detailOrdersPurchase) {
-        return this.repositoryDetailOrdersPurchase.save(detailOrdersPurchase);
+    public DetailOrdersPurchase update( int id,DetailOrdersPurchase detailOrdersPurchase) {
+        detailOrdersPurchase1 = getById(id);
+        detailOrdersPurchase1.setQuantity(detailOrdersPurchase.getQuantity());
+        detailOrdersPurchase1.setOrdersPurchase(detailOrdersPurchase.getOrdersPurchase());
+        detailOrdersPurchase1.setProductService(detailOrdersPurchase.getProductService());
+        detailOrdersPurchase1.setValueTotal(detailOrdersPurchase.getValueTotal());
+        detailOrdersPurchase1.setValueUnitary(detailOrdersPurchase.getValueUnitary());
+        detailOrdersPurchase1.setDateMaximunDeliveryOrder(detailOrdersPurchase.getDateMaximunDeliveryOrder());
+        return this.repositoryDetailOrdersPurchase.save(detailOrdersPurchase1);
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface WayToPayService {
 
     public WayToPay getById(int id);
 
-    public WayToPay update(WayToPay wayToPay);
+    public WayToPay update(int id,WayToPay wayToPay);
 
     public void delete(WayToPay wayToPay);
 }

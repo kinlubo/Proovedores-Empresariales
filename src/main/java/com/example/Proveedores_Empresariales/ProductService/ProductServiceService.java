@@ -13,7 +13,7 @@ public interface ProductServiceService {
 
     public ProductService getById(int id);
 
-    public ProductService update(ProductService productService);
+    public ProductService update(int id,ProductService productService);
 
     public void delete (ProductService productService);
 }

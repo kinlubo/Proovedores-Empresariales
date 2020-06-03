@@ -56,11 +56,8 @@ public class BranchOfficeCompanRestController {
     }
 
     @PostMapping
-    public ResponseEntity<BranchOfficeCompan> save(@RequestBody Integer nic, String name, Integer phone, String mail, String diretion, Integer cityId, Integer companyId)
+    public ResponseEntity<BranchOfficeCompan> save(@RequestBody  BranchOfficeCompan branchOfficeCompan)
     {
-        Company company = companyId(companyId);
-        City city = cityId(cityId);
-        BranchOfficeCompan branchOfficeCompan = new BranchOfficeCompan(nic,name,phone,mail,diretion,city,company);
         return ResponseEntity.ok().body(this.branchOfficeCompanService.save(branchOfficeCompan));
     }
 
@@ -80,23 +77,9 @@ public class BranchOfficeCompanRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<BranchOfficeCompan> update(@PathVariable("identificacion")Integer nic, String name, Integer phone
-            , String mail, String diretion, Integer cityId, Integer companyId ) {
+    public ResponseEntity<BranchOfficeCompan> update(@PathVariable("identificacion")Integer nic,@RequestBody BranchOfficeCompan branchOfficeCompan) {
 
-        BranchOfficeCompan branchOfficeCompan= this.branchOfficeCompanService.getById(nic);
-        if ( branchOfficeCompan == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            branchOfficeCompan.setName(name);
-            branchOfficeCompan.setPhone(phone);
-            branchOfficeCompan.setEmail(mail);
-            branchOfficeCompan.setDirection(diretion);
-            branchOfficeCompan.setCity(cityId(cityId));
-            branchOfficeCompan.setCompany(companyId(companyId));
-            //city.setDepartament(departmentid);
-        }
-        return new ResponseEntity<>(this.branchOfficeCompanService.update(branchOfficeCompan),HttpStatus.OK);
+        return new ResponseEntity<>(this.branchOfficeCompanService.update(nic,branchOfficeCompan),HttpStatus.OK);
 
     }
 

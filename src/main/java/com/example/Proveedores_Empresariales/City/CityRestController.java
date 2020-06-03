@@ -63,18 +63,10 @@ public class CityRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<City> update(@PathVariable("identificacion") Integer id,int code,String nombre, Integer departmentid) {
+    public ResponseEntity<City> update(@PathVariable("identificacion") Integer id,@RequestBody City city) {
 
-        City city= this.cityService.getById(id);
-        if ( city == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            city.setCode(code);
-            city.setName(nombre);
-            //city.setDepartament(departmentid);
-        }
-        return new ResponseEntity<>(this.cityService.update(city),HttpStatus.OK);
+
+        return new ResponseEntity<>(this.cityService.update(id,city),HttpStatus.OK);
 
     }
 

@@ -30,8 +30,12 @@ public class ProductServiceimp implements ProductService{
         return this.repositoryProduct.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
     }
     @Override
-    public Product update(Product product) {
-        return this.repositoryProduct.save(product);
+    public Product update(int id,Product product) {
+
+        Product product1 = getById(id);
+        product1.setPresentation(product.getPresentation());
+        product1.setQuantity(product.getQuantity());
+        return this.repositoryProduct.save(product1);
     }
 
     @Override

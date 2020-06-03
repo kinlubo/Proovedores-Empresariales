@@ -57,12 +57,8 @@ public class DetailPetitionRestController {
         return orderInventory;
     }
     @PostMapping
-    public ResponseEntity<DetailPetition> save(@RequestBody Integer id, int product,int quantity, Integer orderInventory,
-                                               Integer rawMaterialid)
+    public ResponseEntity<DetailPetition> save(@RequestBody DetailPetition detailPetition)
     {
-        RawMaterials rawMaterials = rawMaterialsId(rawMaterialid);
-        OrderInventory orderInventory1 = orderInventoryId(orderInventory);
-        DetailPetition detailPetition  = new DetailPetition(id,product,quantity,orderInventory1,rawMaterials);
         return ResponseEntity.ok().body(this.detailPetitionService.save(detailPetition));
     }
 
@@ -82,22 +78,9 @@ public class DetailPetitionRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<DetailPetition> update(@PathVariable("identificacion")Integer id, Integer productId,int quantity, Integer orderInventory,
-        Integer rawMaterialid) {
+    public ResponseEntity<DetailPetition> update(@PathVariable("identificacion")Integer id, @RequestBody DetailPetition detailPetition) {
 
-        DetailPetition detailPetition= this.detailPetitionService.getById(id);
-        if ( detailPetition== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            detailPetition.setId(id);
-            detailPetition.setProduct(productId);
-            detailPetition.setQuantity(quantity);
-            detailPetition.setOrderInventory(orderInventoryId(orderInventory));
-            detailPetition.setRawMaterials(rawMaterialsId(rawMaterialid));
-
-        }
-        return new ResponseEntity<>(this.detailPetitionService.update(detailPetition), HttpStatus.OK);
+        return new ResponseEntity<>(this.detailPetitionService.update(id,detailPetition), HttpStatus.OK);
 
     }
 

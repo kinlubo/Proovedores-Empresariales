@@ -30,8 +30,11 @@ public class ServiceServiceimp implements ServiceService {
     }
 
     @Override
-    public Service update(Service service) {
-        return this.repositoryService.save(service);
+    public Service update(int id,Service service) {
+        Service service1 = getById(id);
+        service1.setPlan(service.getPlan());
+        service1.setDuration(service.getDuration());
+        return this.repositoryService.save(service1);
     }
 
     @Override

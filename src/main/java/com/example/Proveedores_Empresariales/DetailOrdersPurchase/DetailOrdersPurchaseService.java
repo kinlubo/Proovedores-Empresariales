@@ -14,7 +14,7 @@ public interface DetailOrdersPurchaseService {
 
     public DetailOrdersPurchase getById(int id);
 
-    public DetailOrdersPurchase update(DetailOrdersPurchase detailOrdersPurchase);
+    public DetailOrdersPurchase update(int id,DetailOrdersPurchase detailOrdersPurchase);
 
     public void delete(DetailOrdersPurchase detailOrdersPurchase);
 }

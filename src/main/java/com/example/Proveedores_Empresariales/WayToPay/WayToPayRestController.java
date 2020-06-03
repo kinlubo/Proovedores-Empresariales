@@ -22,10 +22,9 @@ public class WayToPayRestController {
         this.wayToPayService = wayToPayService;
     }
     @PostMapping
-    public ResponseEntity<WayToPay> save(@RequestBody Integer id, String nombre)
+    public ResponseEntity<WayToPay> save(@RequestBody WayToPay wayToPay)
     {
-        WayToPay wayToPay  = new WayToPay(id,nombre);
-        return ResponseEntity.ok().body(this.wayToPayService.save(wayToPay));
+       return ResponseEntity.ok().body(this.wayToPayService.save(wayToPay));
     }
 
     @GetMapping
@@ -44,17 +43,9 @@ public class WayToPayRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<WayToPay> update(@PathVariable("identificacion")Integer id, String nombre, Integer country) {
+    public ResponseEntity<WayToPay> update(@PathVariable("identificacion")Integer id,@RequestBody WayToPay wayToPay) {
 
-        WayToPay departament= this.wayToPayService.getById(id);
-        if ( departament== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            departament.setName(nombre);
-
-        }
-        return new ResponseEntity<>(this.wayToPayService.update(departament), HttpStatus.OK);
+        return new ResponseEntity<>(this.wayToPayService.update(id,wayToPay), HttpStatus.OK);
 
     }
 

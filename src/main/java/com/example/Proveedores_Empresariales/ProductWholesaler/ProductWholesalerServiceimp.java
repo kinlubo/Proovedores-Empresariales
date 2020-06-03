@@ -31,8 +31,11 @@ public class ProductWholesalerServiceimp implements ProductWholesalerService {
 
 
     @Override
-    public ProductWholesaler update(ProductWholesaler productWholesaler) {
-        return this.repositoryProductWholesaler.save(productWholesaler);
+    public ProductWholesaler update(ProductWhoPK productWhoPK,ProductWholesaler productWholesaler) {
+        ProductWholesaler productWholesaler1 = getById(productWhoPK);
+        productWholesaler1.setQuantityFinal(productWholesaler.getQuantityFinal());
+        productWholesaler1.setValue(productWholesaler.getValue());
+        return this.repositoryProductWholesaler.save(productWholesaler1);
     }
 
     @Override

@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RequestMapping("api/v1/Country")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("api/v1/country")
 @RestController
 public class CountryRestController {
 
@@ -39,10 +39,9 @@ public class CountryRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Country> save(@RequestBody Integer id,String name)
+    public ResponseEntity<Country> save(@RequestBody Country country)
     {
-
-        Country country  = new Country(id,name);
+        country.setId(countryService.getAll().size()+1);
         return ResponseEntity.ok().body(this.countryService.save(country));
     }
 
@@ -62,18 +61,9 @@ public class CountryRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Country> update(@PathVariable("identificacion") Integer id,String name) {
+    public ResponseEntity<Country> update(@PathVariable("identificacion") Integer id, @RequestBody Country country) {
 
-        Country country= this.countryService.getById(id);
-        if ( country== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-                country.setId(id);
-                country.setName(name);
-        }
-        return new ResponseEntity<>(this.countryService.update(country), HttpStatus.OK);
-
+        return new ResponseEntity<>(this.countryService.update(id,country), HttpStatus.OK);
     }
 
     @DeleteMapping("/{identificacion}")

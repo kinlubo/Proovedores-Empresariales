@@ -24,9 +24,8 @@ public class ProductRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody Integer id, String presentation, Integer quantity)
+    public ResponseEntity<Product> save(@RequestBody Product product)
     {
-        Product product = new Product(id,presentation,quantity);
                 return ResponseEntity.ok().body(this.productservice.save(product));
     }
 
@@ -46,18 +45,10 @@ public class ProductRestController {
             @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
             @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Product> update(@PathVariable("identificacion") Integer id, String presentation, Integer quantity) {
+    public ResponseEntity<Product> update(@PathVariable("identificacion") Integer id, @RequestBody Product product
+    ) {
 
-        Product product= this.productservice.getById(id);
-        if ( product == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            product.setId(id);
-            product.setPresentation(presentation);
-            product.setQuantity(quantity);
-        }
-        return new ResponseEntity<Product>(this.productservice.update(product),HttpStatus.OK);
+        return new ResponseEntity<Product>(this.productservice.update(id,product),HttpStatus.OK);
 
     }
 

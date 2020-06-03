@@ -31,8 +31,15 @@ public class ProductServiceServiceimp implements ProductServiceService {
     }
 
     @Override
-    public ProductService update(ProductService productService) {
-        return this.repositoryProductService.save(productService);
+    public ProductService update(int id,ProductService productService) {
+        ProductService productService1 = getById(id);
+        productService1.setName(productService.getName());
+        productService1.setValue(productService.getValue());
+        productService1.setUnitMeasure(productService.getUnitMeasure());
+        productService1.setService(productService.getService());
+        productService1.setProduct(productService.getProduct());
+        productService1.setBranchOfficeCompan(productService.getBranchOfficeCompan());
+        return this.repositoryProductService.save(productService1);
     }
 
     @Override

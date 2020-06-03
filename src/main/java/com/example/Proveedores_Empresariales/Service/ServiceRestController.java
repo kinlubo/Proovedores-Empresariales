@@ -21,9 +21,8 @@ public class ServiceRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Service> save(@RequestBody Integer id, String plan, Date duration)
+    public ResponseEntity<Service> save(@RequestBody Service service)
     {
-        Service service  = new Service(id,plan,duration);
         return ResponseEntity.ok().body(this.serviceService.save(service));
     }
 
@@ -43,16 +42,9 @@ public class ServiceRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Service> update(@PathVariable("identificacion") Integer id, String plan, Date duration ) {
+    public ResponseEntity<Service> update(@PathVariable("identificacion") Integer id,@RequestBody Service service) {
 
-        Service service= this.serviceService.getById(id);
-        if ( service== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-
-        }
-        return new ResponseEntity<>(this.serviceService.update(service), HttpStatus.OK);
+        return new ResponseEntity<>(this.serviceService.update(id,service), HttpStatus.OK);
 
     }
 

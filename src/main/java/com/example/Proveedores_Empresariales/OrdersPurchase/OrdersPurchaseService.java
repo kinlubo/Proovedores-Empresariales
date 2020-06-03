@@ -14,7 +14,7 @@ public interface OrdersPurchaseService {
 
     public OrdersPurchase getById(int id);
 
-    public OrdersPurchase update(OrdersPurchase ordersPurchase);
+    public OrdersPurchase update( int id,OrdersPurchase ordersPurchase);
 
     public void delete(OrdersPurchase ordersPurchase);
 }

@@ -60,12 +60,8 @@ public class DetailOrdersPurchaseRestController {
     }
 
     @PostMapping
-    public ResponseEntity<DetailOrdersPurchase> save(@RequestBody Integer idProduct,int quantity,
-                                                     Date dateMaximumDeliveryOrder,int valueUnitary, int valueTotal,
-                                                     Integer prodcutoServiceId, Integer orderPurchaseId )
+    public ResponseEntity<DetailOrdersPurchase> save(@RequestBody DetailOrdersPurchase detailOrdersPurchase)
     {
-
-        DetailOrdersPurchase detailOrdersPurchase  = new DetailOrdersPurchase(idProduct,quantity,dateMaximumDeliveryOrder,valueUnitary,valueTotal,productServiceId(prodcutoServiceId),ordersPurchaseId(orderPurchaseId));
         return ResponseEntity.ok().body(this.detailOrdersPurchaseService.save(detailOrdersPurchase));
     }
 
@@ -85,24 +81,9 @@ public class DetailOrdersPurchaseRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<DetailOrdersPurchase> update(@PathVariable("identificacion")Integer idProduct,int quantity,
-                                                       Date dateMaximumDeliveryOrder,int valueUnitary, int valueTotal,
-                                                       Integer prodcutoServiceId, Integer orderPurchaseId ) {
-
-        DetailOrdersPurchase detailOrdersPurchase= this.detailOrdersPurchaseService.getById(idProduct);
-        if ( detailOrdersPurchase== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            detailOrdersPurchase.setQuantity(quantity);
-            detailOrdersPurchase.setDateMaximunDeliveryOrder(dateMaximumDeliveryOrder);
-            detailOrdersPurchase.setValueUnitary(valueUnitary);
-            detailOrdersPurchase.setValueTotal(valueTotal);
-            detailOrdersPurchase.setProductService(productServiceId(prodcutoServiceId));
-            detailOrdersPurchase.setOrdersPurchase(ordersPurchaseId(orderPurchaseId));
-
-        }
-        return new ResponseEntity<>(this.detailOrdersPurchaseService.update(detailOrdersPurchase), HttpStatus.OK);
+    public ResponseEntity<DetailOrdersPurchase> update(@PathVariable("identificacion")Integer idProduct,@RequestBody DetailOrdersPurchase detailOrdersPurchase )
+    {
+        return new ResponseEntity<>(this.detailOrdersPurchaseService.update(idProduct,detailOrdersPurchase), HttpStatus.OK);
 
     }
 

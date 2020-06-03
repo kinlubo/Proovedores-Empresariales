@@ -93,11 +93,16 @@ public class BranchOfficeAllRestController {
         int varCoun= this.countryService.getAll().size()+1;
         int varDep=this.departmentService.getAll().size()+1;
         int varCit= this.cityService.getAll().size()+1;
-        if(cityId(city_Name)==null)
-        {
-            departament1 = departament(departament_Name);
+        if(country(country_Name)==null)
+        {/*
+            country1 = new Country(varCoun,country_Name);
+            this.countryService.save(country1);
+            departament1 = new Departament(varDep,departament_Name,country1);
+            this.departmentService.save(departament1);
             city = new City(varCit,codeCity,city_Name,departament1);
             this.cityService.save(city);
+            */
+
 
         }else if(departament(departament_Name)==null)
         {
@@ -106,12 +111,10 @@ public class BranchOfficeAllRestController {
             this.departmentService.save(departament1);
             city = new City(varCit,codeCity,city_Name,departament1);
             this.cityService.save(city);
-        } else if(country(country_Name)==null)
+        } else
+            if(cityId(city_Name)==null)
         {
-            country1 = new Country(varCoun,country_Name);
-            this.countryService.save(country1);
-            departament1 = new Departament(varDep,departament_Name,country1);
-            this.departmentService.save(departament1);
+            departament1 = departament(departament_Name);
             city = new City(varCit,codeCity,city_Name,departament1);
             this.cityService.save(city);
 

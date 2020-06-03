@@ -6,6 +6,7 @@ import com.example.Proveedores_Empresariales.Departament.Departament;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import net.bytebuddy.pool.TypePool;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,8 @@ public class RawMaterialsRestController {
     }
 
     @PostMapping
-    public ResponseEntity<RawMaterials> save(@RequestBody Integer code, int type, int measurement_code, String name, String description, BigDecimal max , BigDecimal minimum,int state_code)
+    public ResponseEntity<RawMaterials> save(@RequestBody RawMaterials rawMaterials)
     {
-        RawMaterials rawMaterials  = new RawMaterials(code,type,measurement_code,name,description,max,minimum,state_code);
         return ResponseEntity.ok().body(this.rawMaterialsService.save(rawMaterials));
     }
 
@@ -46,26 +46,9 @@ public class RawMaterialsRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<RawMaterials> update(@PathVariable("identificacion")Integer code, int type, int measurement_code,
-                                               String name, String description, BigDecimal max , BigDecimal minimum,int state_code) {
+    public ResponseEntity<RawMaterials> update(@PathVariable("identificacion")Integer code,@RequestBody RawMaterials rawMaterials) {
 
-        RawMaterials rawMaterials= this.rawMaterialsService.getById(code);
-        if ( rawMaterials== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            rawMaterials.setName(name);
-            rawMaterials.setRawMaterialType(type);
-            rawMaterials.setMeasurementCode(measurement_code);
-            rawMaterials.setName(name);
-            rawMaterials.setDescription(description);
-            rawMaterials.setMaxStock(max);
-            rawMaterials.setMinimumStock(minimum);
-            rawMaterials.setStateCode(state_code);
-
-
-        }
-        return new ResponseEntity<>(this.rawMaterialsService.update(rawMaterials), HttpStatus.OK);
+        return new ResponseEntity<>(this.rawMaterialsService.update(code,rawMaterials), HttpStatus.OK);
 
     }
 

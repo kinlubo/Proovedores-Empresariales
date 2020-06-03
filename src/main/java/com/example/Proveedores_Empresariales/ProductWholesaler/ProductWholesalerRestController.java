@@ -38,11 +38,8 @@ public class ProductWholesalerRestController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductWholesaler> save(@RequestBody Integer code ,Integer qualityIntial, int qualityFinal, int value,Integer producServiceId)
+    public ResponseEntity<ProductWholesaler> save(@RequestBody ProductWholesaler productWholesaler)
     {
-        ProductWhoPK productWholesalerPK = new ProductWhoPK(code, qualityIntial);
-        ProductService productService = productService(producServiceId);
-        ProductWholesaler productWholesaler  = new ProductWholesaler(productWholesalerPK,qualityFinal,value,productService);
         return ResponseEntity.ok().body(this.productWholesalerService.save(productWholesaler));
     }
 
@@ -63,20 +60,9 @@ public class ProductWholesalerRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<ProductWholesaler> update(@PathVariable("identificacion") Integer code ,Integer qualityIntial, int qualityFinal, int value) {
-        ProductWhoPK productWhoPK = new ProductWhoPK(code,qualityIntial);
-        ProductWholesaler productWholesaler= this.productWholesalerService.getById(productWhoPK);
-        if ( productWholesaler== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            ProductWhoPK productWholesalerPK = new ProductWhoPK(code,qualityIntial);
-            productWholesaler.setIdProducto(productWholesalerPK);
-            productWholesaler.setQuantityFinal(qualityFinal);
-            productWholesaler.setValue(value);
+    public ResponseEntity<ProductWholesaler> update(@PathVariable("identificacion") ProductWhoPK productWhoPK,@RequestBody ProductWholesaler productWholesaler) {
 
-        }
-        return new ResponseEntity<>(this.productWholesalerService.update(productWholesaler), HttpStatus.OK);
+        return new ResponseEntity<>(this.productWholesalerService.update(productWhoPK,productWholesaler), HttpStatus.OK);
 
     }
 

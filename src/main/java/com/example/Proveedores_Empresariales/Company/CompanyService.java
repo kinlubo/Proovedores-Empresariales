@@ -14,7 +14,7 @@ public interface CompanyService {
 
     public Company getById(int id);
 
-    public Company update(Company company);
+    public Company update(int nic,Company company);
 
     public void delete (Company company);
 }

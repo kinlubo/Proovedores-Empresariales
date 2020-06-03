@@ -14,7 +14,7 @@ public interface DetailPetitionService {
 
     public DetailPetition getById(int id);
 
-    public DetailPetition update(DetailPetition detailPetition);
+    public DetailPetition update(int id,DetailPetition detailPetition);
 
     public void delete(DetailPetition detailPetition);
 }

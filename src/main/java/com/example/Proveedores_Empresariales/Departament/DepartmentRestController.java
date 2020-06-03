@@ -39,10 +39,8 @@ public class DepartmentRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Departament> save(@RequestBody Integer id,String nombre, Integer country)
+    public ResponseEntity<Departament> save(@RequestBody Departament departament)
     {
-        Country country1 = countryId(country);
-        Departament departament  = new Departament(id,nombre,country1);
         return ResponseEntity.ok().body(this.departmentService.save(departament));
     }
 
@@ -62,19 +60,9 @@ public class DepartmentRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Departament> update(@PathVariable("identificacion")Integer id,String nombre, Integer country) {
+    public ResponseEntity<Departament> update(@PathVariable("identificacion")Integer id,@RequestBody Departament departament) {
 
-        Departament departament= this.departmentService.getById(id);
-        if ( departament== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            departament.setName(nombre);
-            departament.setCountry(countryId(country));
-
-        }
-        return new ResponseEntity<>(this.departmentService.update(departament), HttpStatus.OK);
-
+        return new ResponseEntity<>(this.departmentService.update(id,departament), HttpStatus.OK);
     }
 
     @DeleteMapping("/{identificacion}")

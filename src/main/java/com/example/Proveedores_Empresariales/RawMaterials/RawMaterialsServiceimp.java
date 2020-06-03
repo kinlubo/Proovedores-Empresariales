@@ -32,8 +32,16 @@ public class RawMaterialsServiceimp implements RawMaterialsService {
     }
 
     @Override
-    public RawMaterials update(RawMaterials rawMaterials) {
-        return this.repositoryRawMaterials.save(rawMaterials);
+    public RawMaterials update(int id,RawMaterials rawMaterials) {
+        RawMaterials rawMaterials1 = getById(id);
+        rawMaterials1.setName(rawMaterials.getName());
+        rawMaterials1.setRawMaterialType(rawMaterials.getRawMaterialType());
+        rawMaterials1.setMeasurementCode(rawMaterials.getMeasurementCode());
+        rawMaterials1.setDescription(rawMaterials.getDescription());
+        rawMaterials1.setMaxStock(rawMaterials.getMaxStock());
+        rawMaterials1.setMinimumStock(rawMaterials.getMinimumStock());
+        rawMaterials1.setStateCode(rawMaterials.getStateCode());
+        return this.repositoryRawMaterials.save(rawMaterials1);
     }
 
     @Override

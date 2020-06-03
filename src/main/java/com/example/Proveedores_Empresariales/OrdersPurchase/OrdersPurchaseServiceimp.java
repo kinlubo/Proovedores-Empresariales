@@ -32,8 +32,14 @@ public class OrdersPurchaseServiceimp implements OrdersPurchaseService {
     }
 
     @Override
-    public OrdersPurchase update(OrdersPurchase ordersPurchase) {
-        return this.repositoryOrdersPurchase.save(ordersPurchase);
+    public OrdersPurchase update(int id,OrdersPurchase ordersPurchase) {
+        OrdersPurchase ordersPurchase1 = getById(id);
+        ordersPurchase1.setWayToPay(ordersPurchase.getWayToPay());
+        ordersPurchase1.setDateOrder(ordersPurchase.getDateOrder());
+        ordersPurchase1.setDateDelivery(ordersPurchase.getDateDelivery());
+        ordersPurchase1.setBranchOfficeCompan(ordersPurchase.getBranchOfficeCompan());
+        ordersPurchase1.setOrderInventory(ordersPurchase.getOrderInventory());
+        return this.repositoryOrdersPurchase.save(ordersPurchase1);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface ServiceService {
 
     public Service getById(int id);
 
-    public Service update(Service service);
+    public Service update(int id,Service service);
 
     public void delete (Service service);
 }

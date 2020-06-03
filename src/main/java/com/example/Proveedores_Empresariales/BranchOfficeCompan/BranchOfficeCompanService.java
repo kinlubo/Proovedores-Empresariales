@@ -14,7 +14,7 @@ public interface BranchOfficeCompanService {
 
     public BranchOfficeCompan getById(int id);
 
-    public BranchOfficeCompan update(BranchOfficeCompan branchOfficeCompan);
+    public BranchOfficeCompan update(int nic,BranchOfficeCompan branchOfficeCompan);
 
     public void delete(BranchOfficeCompan branchOfficeCompan);
 }

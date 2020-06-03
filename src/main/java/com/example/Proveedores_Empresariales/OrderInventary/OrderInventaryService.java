@@ -14,7 +14,7 @@ public interface OrderInventaryService {
 
     public OrderInventory getById(int id);
 
-    public OrderInventory update(OrderInventory orderInventory);
+    public OrderInventory update(int id,OrderInventory orderInventory);
 
     public void delete(OrderInventory orderInventory);
 }

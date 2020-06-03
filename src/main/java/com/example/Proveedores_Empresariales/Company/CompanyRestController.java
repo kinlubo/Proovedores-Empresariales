@@ -24,9 +24,8 @@ public class CompanyRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Company> save(@RequestBody Integer nic,String name,String mail,int phone,String direccion)
+    public ResponseEntity<Company> save(@RequestBody Company company)
     {
-        Company company = new Company(nic,name,mail,phone,direccion);
         return ResponseEntity.ok().body(this.companyService.save(company));
     }
 
@@ -46,19 +45,9 @@ public class CompanyRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Company> update(@PathVariable("identificacion") Integer nic,String name,String mail,int phone,String direccion ) {
-
-        Company company= this.companyService.getById(nic);
-        if ( company== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            company.setName(name);
-            company.setEmail(mail);
-            company.setPhone(phone);
-            company.setDirection(direccion);
-        }
-        return new ResponseEntity<>(this.companyService.update(company), HttpStatus.OK);
+    public ResponseEntity<Company> update(@PathVariable("identificacion") Integer nic,@RequestBody Company company)
+    {
+        return new ResponseEntity<>(this.companyService.update(nic,company), HttpStatus.OK);
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.Proveedores_Empresariales.Orders;
 
 import com.example.Proveedores_Empresariales.Departament.Departament;
+import com.example.Proveedores_Empresariales.OrderInventary.OrderInventory;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,9 @@ public class OrdersServiceimp implements OrdersService {
     }
 
     @Override
-    public Orders update(Orders orders) {
+    public Orders update(int code,Orders orders) {
+        Orders orders1 = getById(code);
+        orders1.setStateCode(orders.getStateCode());
         return this.repositoryOrders.save(orders);
     }
 

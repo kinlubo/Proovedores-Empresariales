@@ -31,8 +31,10 @@ public class BranchOfficeCompanServiceimp implements BranchOfficeCompanService {
         return this.repositoryCity.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
     }
     @Override
-    public BranchOfficeCompan update(BranchOfficeCompan branchOfficeCompan) {
-        return this.repositoryCity.save(branchOfficeCompan);
+    public BranchOfficeCompan update( int nic,BranchOfficeCompan branchOfficeCompan) {
+        BranchOfficeCompan branchOfficeCompan1 = getById(nic);
+        branchOfficeCompan1.setName(branchOfficeCompan.getName());
+        return this.repositoryCity.save(branchOfficeCompan1);
     }
 
     @Override

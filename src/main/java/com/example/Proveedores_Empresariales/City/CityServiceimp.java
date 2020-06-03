@@ -31,8 +31,10 @@ public class CityServiceimp implements CityService {
         return this.repositoryCity.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
     }
     @Override
-    public City update(City city) {
-        return this.repositoryCity.save(city);
+    public City update(int id,City city) {
+        City city1 = getById(id);
+        city1.setName(city.getName());
+        return this.repositoryCity.save(city1);
     }
 
     @Override

@@ -39,10 +39,9 @@ public class OrdersRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Orders> save(@RequestBody Integer code, int branchOffice, int stateCode, Integer orderInventory)
+    public ResponseEntity<Orders> save(@RequestBody Orders orders
+    )
     {
-        OrderInventory orderInventory1 = orderInventoryId(orderInventory);
-        Orders orders  = new Orders(code,branchOffice,stateCode,orderInventory1);
         return ResponseEntity.ok().body(this.ordersService.save(orders));
     }
 
@@ -62,20 +61,11 @@ public class OrdersRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Orders> update(@PathVariable("identificacion")Integer code, Integer branchOffice, int stateCode, Integer orderInventory) {
+    public ResponseEntity<Orders> update(@PathVariable("identificacion")Integer code,@RequestBody Orders orders
+    ) {
 
-        Orders orders= this.ordersService.getById(code);
-        if ( orders== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            orders.setCode(code);
-            orders.setBranchOffice(branchOffice);
-            orders.setStateCode(stateCode);
-            orders.setOrderInventory(orderInventoryId(orderInventory));
 
-        }
-        return new ResponseEntity<>(this.ordersService.update(orders), HttpStatus.OK);
+        return new ResponseEntity<>(this.ordersService.update(code,orders), HttpStatus.OK);
 
     }
 

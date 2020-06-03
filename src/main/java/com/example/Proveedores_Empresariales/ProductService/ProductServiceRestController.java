@@ -78,13 +78,8 @@ public class ProductServiceRestController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductService> save(@RequestBody Integer id,int code,String name,int value,int unitMeasure,
-            Integer serviceId,Integer productId,Integer branchOfficeCompanId)
+    public ResponseEntity<ProductService> save(@RequestBody ProductService productService)
     {
-        Service service = serviceId(serviceId);
-        Product product = productId(productId);
-        BranchOfficeCompan branchOfficeCompan = branchOfficeCompanId(branchOfficeCompanId);
-        ProductService productService  = new ProductService(id,code,name,value,unitMeasure,service,product,branchOfficeCompan);
         return ResponseEntity.ok().body(this.productServiceService.save(productService));
     }
 
@@ -104,24 +99,9 @@ public class ProductServiceRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<ProductService> update(@PathVariable("identificacion") Integer id,int code,String name,int value,int unitMeasure
-                ,Integer serviceId,Integer productId,Integer productWholesalerId,Integer branchOfficeCompanId) {
+    public ResponseEntity<ProductService> update(@PathVariable("identificacion") Integer id,@RequestBody ProductService productService) {
 
-        ProductService productService= this.productServiceService.getById(id);
-        if ( productService== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            productService.setCode(code);
-            productService.setName(name);
-            productService.setValue(value);
-            productService.setUnitMeasure(unitMeasure);
-            productService.setService(serviceId(serviceId));
-            productService.setProduct(productId(productId));
-            productService.setBranchOfficeCompan(branchOfficeCompanId(branchOfficeCompanId));
-            //productService.setProductWholesaler(productWholesalerId(productWholesalerId));
-        }
-        return new ResponseEntity<>(this.productServiceService.update(productService), HttpStatus.OK);
+        return new ResponseEntity<>(this.productServiceService.update(id,productService), HttpStatus.OK);
 
     }
 

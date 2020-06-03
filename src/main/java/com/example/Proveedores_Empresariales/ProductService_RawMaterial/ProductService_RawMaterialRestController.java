@@ -36,10 +36,8 @@ public class ProductService_RawMaterialRestController {
     @ApiOperation(value = "Crear nuevo producto o servicio", notes = "Crea nuevo producto o servicio de proveedor")
     @ApiResponses(value={@ApiResponse(code = 201, message = "Creado Correctamente"),
             @ApiResponse(code = 400, message = "Solicitud Inválida")})
-    public ResponseEntity<ProductService_RawMaterial> save(@RequestBody Integer productoservicioId , Integer rawMaterial)
+    public ResponseEntity<ProductService_RawMaterial> save(@RequestBody ProductService_RawMaterial productService_rawMaterial)
     {
-      ProductService_RawMaterialPK productService_rawMaterialPK = new ProductService_RawMaterialPK(productoservicioId,rawMaterial);
-      ProductService_RawMaterial productService_rawMaterial = new ProductService_RawMaterial(productService_rawMaterialPK);
       return ResponseEntity.ok().body(this.productService_rawMaterialService.save(productService_rawMaterial));
     }
 

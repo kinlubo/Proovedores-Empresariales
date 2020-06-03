@@ -31,8 +31,11 @@ public class WayToPayServiceimp implements WayToPayService {
     }
 
     @Override
-    public WayToPay update(WayToPay wayToPay) {
-        return this.repositoryWayToPay.save(wayToPay);
+    public WayToPay update(int id,WayToPay wayToPay)
+    {
+        WayToPay wayToPay1 = getById(id);
+        wayToPay1.setName(wayToPay.getName());
+        return this.repositoryWayToPay.save(wayToPay1);
     }
 
     @Override

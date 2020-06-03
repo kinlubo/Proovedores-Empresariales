@@ -31,7 +31,9 @@ public class CountryServiceimp implements CountryService {
     }
 
     @Override
-    public Country update(Country country) {
+    public Country update(int Id, Country country) {
+        Country countryTo = getById(Id);
+        countryTo.setName(country.getName());
         return this.repositoryCountry.save(country);
     }
 

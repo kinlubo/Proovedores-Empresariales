@@ -75,10 +75,8 @@ public class OrdersPurchaseRestController {
     }
 
     @PostMapping
-    public ResponseEntity<OrdersPurchase> save(@RequestBody Integer id, Date dateorder,Date dateDelivery,Integer waytoPay,
-                                               Integer branchOffice, Integer orderInventary)
+    public ResponseEntity<OrdersPurchase> save(@RequestBody OrdersPurchase ordersPurchase)
     {
-        OrdersPurchase ordersPurchase = new OrdersPurchase(id,dateorder,dateDelivery,wayToPayId(waytoPay),branchOfficeCompanId(branchOffice),orderInventoryId(orderInventary));
         return ResponseEntity.ok().body(this.ordersPurchaseService.save(ordersPurchase));
     }
 
@@ -98,22 +96,10 @@ public class OrdersPurchaseRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<OrdersPurchase> update(@PathVariable("identificacion")Integer id, Date dateorder,Date dateDelivery,Integer waytoPay,
-                                                 Integer branchOffice, Integer orderInventary) {
+    public ResponseEntity<OrdersPurchase> update(@PathVariable("identificacion")Integer id,@RequestBody OrdersPurchase ordersPurchase) {
 
-        OrdersPurchase ordersPurchase= this.ordersPurchaseService.getById(id);
-        if ( ordersPurchase== null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            ordersPurchase.setId(id);
-            ordersPurchase.setDateOrder(dateorder);
-            ordersPurchase.setDateDelivery(dateDelivery);
-            ordersPurchase.setWayToPay(wayToPayId(waytoPay));
-            ordersPurchase.setBranchOfficeCompan(branchOfficeCompanId(branchOffice));
-            ordersPurchase.setOrderInventory(orderInventoryId(orderInventary));
-        }
-        return new ResponseEntity<>(this.ordersPurchaseService.update(ordersPurchase), HttpStatus.OK);
+
+        return new ResponseEntity<>(this.ordersPurchaseService.update(id,ordersPurchase), HttpStatus.OK);
 
     }
 

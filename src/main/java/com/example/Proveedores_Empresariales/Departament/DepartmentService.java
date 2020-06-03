@@ -15,7 +15,7 @@ public interface DepartmentService {
 
     public Departament getById(int id);
 
-    public Departament update(Departament departament);
+    public Departament update(int id,Departament departament);
 
     public void delete (Departament departament);
 }

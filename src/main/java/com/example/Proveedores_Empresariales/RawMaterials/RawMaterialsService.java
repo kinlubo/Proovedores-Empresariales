@@ -14,7 +14,7 @@ public interface RawMaterialsService {
 
     public RawMaterials getById(int id);
 
-    public RawMaterials update(RawMaterials rawMaterials);
+    public RawMaterials update(int code,RawMaterials rawMaterials);
 
     public void delete(RawMaterials rawMaterials);
 }
