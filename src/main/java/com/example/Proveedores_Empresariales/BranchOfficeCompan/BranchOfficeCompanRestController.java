@@ -73,6 +73,7 @@ public class BranchOfficeCompanRestController {
         return ResponseEntity.ok().body(this.branchOfficeCompanService.getById(id));
     }
 
+
     @PutMapping("/{identificacion}")
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),

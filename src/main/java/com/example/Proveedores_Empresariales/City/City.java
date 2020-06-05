@@ -18,6 +18,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     @Basic(optional = false)
     private int code;

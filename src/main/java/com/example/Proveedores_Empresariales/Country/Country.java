@@ -22,6 +22,7 @@ public class Country implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Basic(optional = false)
     @Column(name = "name")

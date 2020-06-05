@@ -90,10 +90,12 @@ public class ProductServiceRestController {
     }
 
     @GetMapping ( path = "/{id}")
-    public ResponseEntity<ProductService>getById(@PathVariable("id") int id)
+    public ResponseEntity<List>getById(@PathVariable("id") String name)
     {
-        return ResponseEntity.ok().body(this.productServiceService.getById(id));
+        return ResponseEntity.ok().body(this.productServiceService.lista_Provedores(name));
     }
+
+
 
     @PutMapping("/{identificacion}")
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")

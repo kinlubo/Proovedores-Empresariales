@@ -16,4 +16,6 @@ public interface ProductServiceService {
     public ProductService update(int id,ProductService productService);
 
     public void delete (ProductService productService);
+
+    public List lista_Provedores(String name);
 }

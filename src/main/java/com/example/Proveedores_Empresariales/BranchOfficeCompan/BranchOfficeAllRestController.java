@@ -8,6 +8,7 @@ import com.example.Proveedores_Empresariales.Country.Country;
 import com.example.Proveedores_Empresariales.Country.CountryService;
 import com.example.Proveedores_Empresariales.Departament.Departament;
 import com.example.Proveedores_Empresariales.Departament.DepartmentService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,50 +86,19 @@ public class BranchOfficeAllRestController {
     }
 
     @PostMapping
-    public ResponseEntity<BranchOfficeCompan> save(@RequestBody Integer nic, String name, Integer phone, String mail, String diretion, String city_Name,String country_Name, Integer companyId,String departament_Name,int codeCity)
-    {   BranchOfficeCompan branchOfficeCompan = null;
-        Country country1 = null;
-        Departament departament1 = null;
-        City city = null;
-        int varCoun= this.countryService.getAll().size()+1;
-        int varDep=this.departmentService.getAll().size()+1;
-        int varCit= this.cityService.getAll().size()+1;
-        if(country(country_Name)==null)
-        {/*
-            country1 = new Country(varCoun,country_Name);
-            this.countryService.save(country1);
-            departament1 = new Departament(varDep,departament_Name,country1);
-            this.departmentService.save(departament1);
-            city = new City(varCit,codeCity,city_Name,departament1);
-            this.cityService.save(city);
-            */
-
-
-        }else if(departament(departament_Name)==null)
-        {
-            country1 = country(country_Name);
-            departament1 = new Departament(varDep,departament_Name,country1);
-            this.departmentService.save(departament1);
-            city = new City(varCit,codeCity,city_Name,departament1);
-            this.cityService.save(city);
-        } else
-            if(cityId(city_Name)==null)
-        {
-            departament1 = departament(departament_Name);
-            city = new City(varCit,codeCity,city_Name,departament1);
-            this.cityService.save(city);
-
-        } else
-        {
-            city = cityId(city_Name);
-        }
-        Company company = companyId(companyId);
-        branchOfficeCompan =  new BranchOfficeCompan(nic,name,phone,mail,diretion,city,company);
+    public ResponseEntity<BranchOfficeCompan> save(@RequestBody BranchOfficeCompan branchOfficeCompan)
+    {
+        int ver = this.branchOfficeCompanService.getAll().size()+1;
+        branchOfficeCompan.setNic(ver);
+        City city = branchOfficeCompan.getCity();
+        Departament departament = city.getDepartament();
+        Country country = departament.getCountry();
+        Company company =
         return ResponseEntity.ok().body(this.branchOfficeCompanService.save(branchOfficeCompan));
     }
 
     @PostMapping(path = "/{id}")
-    public ResponseEntity<Company> save(@RequestBody @PathVariable("id") Integer nic, String name, String mail, int phone, String direccion)
+    public ResponseEntity<Company> save(@PathVariable("id") Integer nic, String name, String mail, int phone, String direccion)
     {
         Company company = new Company(nic,name,mail,phone,direccion);
         return ResponseEntity.ok().body(this.companyService.save(company));

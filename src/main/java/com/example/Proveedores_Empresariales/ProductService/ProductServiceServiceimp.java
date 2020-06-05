@@ -46,4 +46,9 @@ public class ProductServiceServiceimp implements ProductServiceService {
     public void delete(ProductService productService) {
         this.repositoryProductService.delete(productService);
     }
+
+    @Override
+    public List lista_Provedores(String name) {
+        return this.repositoryProductService.findFInd(name);
+    }
 }
