@@ -17,7 +17,6 @@ import java.util.Collection;
 public class RawMaterials {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer code;
     @Basic(optional = false)

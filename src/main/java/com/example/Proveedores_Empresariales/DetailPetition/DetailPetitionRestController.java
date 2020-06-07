@@ -1,7 +1,5 @@
 package com.example.Proveedores_Empresariales.DetailPetition;
 
-import com.example.Proveedores_Empresariales.Country.Country;
-import com.example.Proveedores_Empresariales.Country.CountryService;
 import com.example.Proveedores_Empresariales.OrderInventary.OrderInventaryService;
 import com.example.Proveedores_Empresariales.OrderInventary.OrderInventory;
 import com.example.Proveedores_Empresariales.RawMaterials.RawMaterials;

@@ -20,7 +20,6 @@ public class OrderInventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer identification;
     @Basic(optional = false)

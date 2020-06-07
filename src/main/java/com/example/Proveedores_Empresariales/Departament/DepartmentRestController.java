@@ -1,7 +1,6 @@
 package com.example.Proveedores_Empresariales.Departament;
 
-import com.example.Proveedores_Empresariales.Country.Country;
-import com.example.Proveedores_Empresariales.Country.CountryService;
+import com.example.Proveedores_Empresariales.City.City;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,31 +16,17 @@ import java.util.List;
 public class DepartmentRestController {
 
     private DepartmentService departmentService;
-    private CountryService countryService;
 
-    public DepartmentRestController(DepartmentService departmentService, CountryService countryService) {
+
+    public DepartmentRestController(DepartmentService departmentService) {
         this.departmentService = departmentService;
-        this.countryService = countryService;
     }
 
-    public Country countryId(Integer id)
-    {
-        Country country = null;
-        List<Country> countries = countryService.getAll();
-        for (int i = 0; countries.size()>i; i++)
-        {
-            if(countries.get(i).getId()==id)
-            {
-                country = countries.get(i);
-            }
-        }
-        return country;
-    }
 
     @PostMapping
     public ResponseEntity<Departament> save(@RequestBody Departament departament)
     {
-        return ResponseEntity.ok().body(this.departmentService.save(departament));
+        return ResponseEntity.ok().body(departmentService.save(departament));
     }
 
     @GetMapping
@@ -75,5 +60,10 @@ public class DepartmentRestController {
         if ( departament!= null) {
             this.departmentService.delete(departament);
         }
+    }
+
+    @GetMapping(path = "/esp/{name}")
+    public ResponseEntity<Departament> getByFirstName(@PathVariable("name") String name){
+        return ResponseEntity.ok().body(departmentService.getByName(name));
     }
 }

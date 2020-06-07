@@ -1,6 +1,6 @@
 package com.example.Proveedores_Empresariales.Departament;
 
-import com.example.Proveedores_Empresariales.Country.Country;
+import com.example.Proveedores_Empresariales.City.City;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +13,7 @@ public class DepartmentServiceimp implements DepartmentService {
 
     public DepartmentServiceimp(RepositoryDepartment repositoryDepartment) {
         this.repositoryDepartment = repositoryDepartment;
+
     }
 
 
@@ -28,7 +29,7 @@ public class DepartmentServiceimp implements DepartmentService {
 
     @Override
     public Departament getById(int id) {
-        return this.repositoryDepartment.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
+        return this.repositoryDepartment.findById(id).orElseThrow(()-> new ResourceNotFoundException("Department identified by :"+id+" . Not found"));
     }
 
     @Override
@@ -42,5 +43,10 @@ public class DepartmentServiceimp implements DepartmentService {
     @Override
     public void delete(Departament departament) {
         this.repositoryDepartment.delete(departament);
+    }
+
+    @Override
+    public Departament getByName(String name) {
+        return this.repositoryDepartment.findDepartamentByName(name);
     }
 }

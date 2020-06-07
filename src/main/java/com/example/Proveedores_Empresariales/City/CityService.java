@@ -12,9 +12,11 @@ public interface CityService {
 
     public List<City> getAll();
 
-    public City getById(int id);
+    public City getById(CityPK id);
 
-    public City update( int id,City city);
+    public City update( CityPK id,City city);
 
     public void delete (City city);
+
+    public City getByName(String name);
 }

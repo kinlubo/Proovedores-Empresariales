@@ -1,6 +1,7 @@
 package com.example.Proveedores_Empresariales.BranchOfficeCompan;
 
 import com.example.Proveedores_Empresariales.City.City;
+import com.example.Proveedores_Empresariales.City.CityPK;
 import com.example.Proveedores_Empresariales.City.CityService;
 import com.example.Proveedores_Empresariales.Company.Company;
 import com.example.Proveedores_Empresariales.Company.CompanyService;
@@ -41,13 +42,13 @@ public class BranchOfficeCompanRestController {
         return  company;
     }
 
-    public City cityId(Integer id)
+    public City cityId(CityPK id)
     {
         City city = null;
         List<City> cities = cityService.getAll();
         for (int i = 0; cities.size()>i; i++)
         {
-            if(cities.get(i).getId()==id)
+            if(cities.get(i).getCityPK()==id)
             {
                 city = cities.get(i);
             }

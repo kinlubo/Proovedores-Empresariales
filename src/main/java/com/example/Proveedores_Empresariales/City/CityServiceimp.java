@@ -27,11 +27,11 @@ public class CityServiceimp implements CityService {
     }
 
     @Override
-    public City getById(int id) {
-        return this.repositoryCity.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
+    public City getById(CityPK id) {
+        return this.repositoryCity.findById(id).orElseThrow(()-> new ResourceNotFoundException("City identified by :"+id+" . Not found"));
     }
     @Override
-    public City update(int id,City city) {
+    public City update(CityPK id,City city) {
         City city1 = getById(id);
         city1.setName(city.getName());
         return this.repositoryCity.save(city1);
@@ -40,5 +40,10 @@ public class CityServiceimp implements CityService {
     @Override
     public void delete(City city) {
         this.repositoryCity.delete(city);
+    }
+
+    @Override
+    public City getByName(String name) {
+        return this.repositoryCity.findCityByName(name);
     }
 }

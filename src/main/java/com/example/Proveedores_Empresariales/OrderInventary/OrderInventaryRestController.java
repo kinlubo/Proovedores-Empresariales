@@ -1,7 +1,5 @@
 package com.example.Proveedores_Empresariales.OrderInventary;
 
-import com.example.Proveedores_Empresariales.Country.Country;
-import com.example.Proveedores_Empresariales.Country.CountryService;
 import com.example.Proveedores_Empresariales.Departament.Departament;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -19,26 +17,9 @@ import java.util.List;
 public class OrderInventaryRestController {
 
     private OrderInventaryService orderInventaryService;
-    private CountryService countryService;
 
-    public OrderInventaryRestController(OrderInventaryService orderInventaryService, CountryService countryService) {
-        this.orderInventaryService = orderInventaryService;
-        this.countryService = countryService;
-    }
 
-    public Country countryId(Integer id)
-    {
-        Country country = null;
-        List<Country> countries = countryService.getAll();
-        for (int i = 0; countries.size()>i; i++)
-        {
-            if(countries.get(i).getId()==id)
-            {
-                country = countries.get(i);
-            }
-        }
-        return country;
-    }
+
 
     @PostMapping
     public ResponseEntity<OrderInventory> save(@RequestBody OrderInventory orderInventory )

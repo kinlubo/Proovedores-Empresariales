@@ -1,7 +1,6 @@
 package com.example.Proveedores_Empresariales.WayToPay;
 
-import com.example.Proveedores_Empresariales.Country.Country;
-import com.example.Proveedores_Empresariales.Country.CountryService;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

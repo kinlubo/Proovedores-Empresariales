@@ -17,6 +17,7 @@ import java.util.Collection;
 
         private static final long serialVersionUID = 1L;
         @Id
+        @GeneratedValue
         @Basic(optional = false)
         private Integer id;
         @Basic(optional = false)
