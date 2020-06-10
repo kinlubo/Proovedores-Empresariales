@@ -27,7 +27,7 @@ public class OrdersPurchase implements Serializable {
     @Basic(optional = false)
     @Column(name = "date_order")
     private Date dateOrder;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "date_delivery")
     private Date dateDelivery;
     @JoinColumn(name = "way_to_pay_id", referencedColumnName = "id")
@@ -37,6 +37,6 @@ public class OrdersPurchase implements Serializable {
     @ManyToOne(optional = false)
     private BranchOfficeCompan branchOfficeCompan;
     @JoinColumn(name = "petitions_inventory_identification", referencedColumnName = "identification")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private OrderInventory orderInventory;
 }

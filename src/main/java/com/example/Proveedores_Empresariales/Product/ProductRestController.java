@@ -15,6 +15,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/Product")
 @RestController
+@CrossOrigin
 public class ProductRestController {
 
     private ProductService productservice;
@@ -63,4 +64,6 @@ public class ProductRestController {
             this.productservice.delete(product);
         }
     }
+
+
 }

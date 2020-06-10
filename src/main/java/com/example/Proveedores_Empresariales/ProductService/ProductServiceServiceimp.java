@@ -1,5 +1,8 @@
 package com.example.Proveedores_Empresariales.ProductService;
 
+import com.example.Proveedores_Empresariales.Product.RepositoryProduct;
+import com.example.Proveedores_Empresariales.Service.RepositoryService;
+import com.example.Proveedores_Empresariales.Service.ServiceService;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +12,20 @@ import java.util.List;
 public class ProductServiceServiceimp implements ProductServiceService {
 
     private RepositoryProductService repositoryProductService;
+    private ServiceService repositoryService;
+    private com.example.Proveedores_Empresariales.Product.ProductService repositoryProduct;
 
-    public ProductServiceServiceimp(RepositoryProductService repositoryProductService) {
+    public ProductServiceServiceimp(RepositoryProductService repositoryProductService, RepositoryService repositoryService, RepositoryProduct repositoryProduct, ServiceService repositoryService1, com.example.Proveedores_Empresariales.Product.ProductService repositoryProduct1) {
         this.repositoryProductService = repositoryProductService;
+        this.repositoryService = repositoryService1;
+        this.repositoryProduct = repositoryProduct1;
     }
 
 
     @Override
     public ProductService save(ProductService productService) {
+            repositoryProduct.save(productService.getProduct());
+            repositoryService.save(productService.getService());
         return this.repositoryProductService.save(productService);
     }
 

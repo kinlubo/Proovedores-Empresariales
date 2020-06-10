@@ -24,18 +24,16 @@ public class ProductService implements Serializable {
     @Basic(optional = false)
     private Integer id;
     @Basic(optional = true)
-    private int code;
-    @Basic(optional = true)
     private String name;
     @Basic(optional = true)
     private int value;
     @Basic(optional = true)
-    @Column(name = "unit_measure")
+    @Column(name = "unit_measure",nullable = true)
     private int unitMeasure;
-    @JoinColumn(name = "service_id")
+    @JoinColumn(name = "service_id",nullable = true,updatable = true)
     @OneToOne(optional = true)
     private Service service;
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id",nullable = true,updatable = true)
     @OneToOne(optional = true)
     private Product product;
     @JoinColumn(name = "branchoffice_company_nic")

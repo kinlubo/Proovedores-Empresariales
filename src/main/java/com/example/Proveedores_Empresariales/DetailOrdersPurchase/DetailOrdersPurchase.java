@@ -20,11 +20,12 @@ public class DetailOrdersPurchase implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue
     @Column(name = "id_producto")
     private Integer idProducto;
     @Basic(optional = false)
     private int quantity;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "date_maximun_delivery_order")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateMaximunDeliveryOrder;

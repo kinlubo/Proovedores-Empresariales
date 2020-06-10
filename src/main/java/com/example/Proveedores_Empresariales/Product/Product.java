@@ -1,5 +1,6 @@
 package com.example.Proveedores_Empresariales.Product;
 
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,9 @@ import java.util.Collection;
         @GeneratedValue
         @Basic(optional = false)
         private Integer id;
-        @Basic(optional = false)
+        @Basic(optional = true)
         private String presentation;
-        @Basic(optional = false)
+        @Basic(optional = true)
         private int quantity;
     }
 

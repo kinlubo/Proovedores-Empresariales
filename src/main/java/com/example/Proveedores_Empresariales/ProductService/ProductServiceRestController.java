@@ -16,11 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RequestMapping("api/v1/productservice")
 @RestController
 @Api(tags = "ProductServices")
+@CrossOrigin
 public class ProductServiceRestController {
 
     private ProductServiceService productServiceService;
@@ -63,7 +65,7 @@ public class ProductServiceRestController {
         }
         return  product;
     }
-    public BranchOfficeCompan branchOfficeCompanId(Integer id)
+    public BranchOfficeCompan branchOfficeCompanId(BigInteger id)
     {
         BranchOfficeCompan branchOfficeCompan = null;
         List<BranchOfficeCompan> branchOfficeCompans = branchOfficeCompanService.getAll();
@@ -90,7 +92,7 @@ public class ProductServiceRestController {
     }
 
     @GetMapping ( path = "/{id}")
-    public ResponseEntity<List>getById(@PathVariable("id") String name)
+    public ResponseEntity<List>getByName(@PathVariable("id") String name)
     {
         return ResponseEntity.ok().body(this.productServiceService.lista_Provedores(name));
     }

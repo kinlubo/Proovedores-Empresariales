@@ -9,6 +9,7 @@ import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundEx
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -46,11 +47,11 @@ public class BranchOfficeCompanServiceimp implements BranchOfficeCompanService {
     }
 
     @Override
-    public BranchOfficeCompan getById(int id) {
+    public BranchOfficeCompan getById(BigInteger id) {
         return this.repositoryBranchOfficeCompan.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
     }
     @Override
-    public BranchOfficeCompan update( int nic,BranchOfficeCompan branchOfficeCompan) {
+    public BranchOfficeCompan update( BigInteger nic,BranchOfficeCompan branchOfficeCompan) {
         BranchOfficeCompan branchOfficeCompan1 = getById(nic);
         branchOfficeCompan1.setName(branchOfficeCompan.getName());
         return this.repositoryBranchOfficeCompan.save(branchOfficeCompan1);

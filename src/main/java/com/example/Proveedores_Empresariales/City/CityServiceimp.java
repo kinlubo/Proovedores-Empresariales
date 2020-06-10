@@ -40,7 +40,8 @@ public class CityServiceimp implements CityService {
 
     @Override
     public City getById(CityPK id) {
-        return this.repositoryCity.findById(id).orElseThrow(()-> new ResourceNotFoundException("City identified by :"+id+" . Not found"));
+        return this.repositoryCity.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("City identified by :"+id+" . Not found"));
     }
     @Override
     public City update(CityPK id,City city) {

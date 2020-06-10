@@ -12,6 +12,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/waytopay")
 @RestController
+@CrossOrigin
 public class WayToPayRestController {
 
     private WayToPayService wayToPayService;

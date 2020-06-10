@@ -15,6 +15,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/detailpetition")
 @RestController
+@CrossOrigin
 public class DetailPetitionRestController {
 
     private DetailPetitionService detailPetitionService;

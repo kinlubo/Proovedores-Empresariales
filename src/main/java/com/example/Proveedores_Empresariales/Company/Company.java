@@ -18,7 +18,7 @@ public class Company implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    private Integer nic;
+    private BigInteger nic;
     @Basic(optional = false)
     private String name;
     @Basic(optional = false)

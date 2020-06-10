@@ -13,11 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
 
 @RequestMapping("api/v1/orderspurchase")
 @RestController
+@CrossOrigin
 public class OrdersPurchaseRestController {
 
     private OrdersPurchaseService ordersPurchaseService;
@@ -46,7 +48,7 @@ public class OrdersPurchaseRestController {
         return orderInventory;
     }
 
-    public BranchOfficeCompan branchOfficeCompanId(Integer id)
+    public BranchOfficeCompan branchOfficeCompanId(BigInteger id)
     {
         BranchOfficeCompan branchOfficeCompan = null;
         List<BranchOfficeCompan> branchOfficeCompans = branchOfficeCompanService.getAll();

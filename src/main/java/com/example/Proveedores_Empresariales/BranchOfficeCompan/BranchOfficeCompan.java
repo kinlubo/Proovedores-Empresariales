@@ -28,7 +28,7 @@ public class BranchOfficeCompan implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "nic")
-    private Integer nic;
+    private BigInteger nic;
     @Basic(optional = false)
     @Column(name = "direction")
     private String direction;
@@ -57,11 +57,11 @@ public class BranchOfficeCompan implements Serializable {
     public BranchOfficeCompan() {
     }
 
-    public BranchOfficeCompan(Integer nic) {
+    public BranchOfficeCompan(BigInteger nic) {
         this.nic = nic;
     }
 
-    public BranchOfficeCompan(Integer nic, String direction, String email, String name, BigInteger phone) {
+    public BranchOfficeCompan(BigInteger nic, String direction, String email, String name, BigInteger phone) {
         this.nic = nic;
         this.direction = direction;
         this.email = email;
@@ -69,11 +69,11 @@ public class BranchOfficeCompan implements Serializable {
         this.phone = phone;
     }
 
-    public Integer getNic() {
+    public BigInteger getNic() {
         return nic;
     }
 
-    public void setNic(Integer nic) {
+    public void setNic(BigInteger nic) {
         this.nic = nic;
     }
 

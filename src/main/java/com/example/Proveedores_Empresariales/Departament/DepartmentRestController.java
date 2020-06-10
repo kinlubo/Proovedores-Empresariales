@@ -13,6 +13,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/departament")
 @RestController
+@CrossOrigin
 public class DepartmentRestController {
 
     private DepartmentService departmentService;

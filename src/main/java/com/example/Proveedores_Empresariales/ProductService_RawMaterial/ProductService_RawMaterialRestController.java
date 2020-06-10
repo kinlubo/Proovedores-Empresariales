@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("api/v1/productservicerawmaterial")
 @RestController
 @Api(tags = "ProductServices-RawMaterial")
+@CrossOrigin
 public class ProductService_RawMaterialRestController {
 
     private ProductService_RawMaterialService productService_rawMaterialService;

@@ -14,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/ProductWholesaler")
 @RestController
+@CrossOrigin
 public class ProductWholesalerRestController {
 
     private ProductWholesalerService productWholesalerService;

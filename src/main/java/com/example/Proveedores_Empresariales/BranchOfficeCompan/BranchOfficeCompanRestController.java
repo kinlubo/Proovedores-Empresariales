@@ -12,10 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RequestMapping("api/v1/branchoffice")
 @RestController
+@CrossOrigin
 public class BranchOfficeCompanRestController {
 
     private BranchOfficeCompanService branchOfficeCompanService;
@@ -32,6 +34,7 @@ public class BranchOfficeCompanRestController {
     @PostMapping
     public ResponseEntity<BranchOfficeCompan> save(@RequestBody  BranchOfficeCompan branchOfficeCompan)
     {
+
         return ResponseEntity.ok().body(this.branchOfficeCompanService.save(branchOfficeCompan));
     }
 
@@ -42,7 +45,7 @@ public class BranchOfficeCompanRestController {
     }
 
     @GetMapping ( path = "/{id}")
-    public ResponseEntity<BranchOfficeCompan>getById(@PathVariable("id") int id)
+    public ResponseEntity<BranchOfficeCompan>getById(@PathVariable("id") BigInteger id)
     {
         return ResponseEntity.ok().body(this.branchOfficeCompanService.getById(id));
     }
@@ -52,7 +55,7 @@ public class BranchOfficeCompanRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<BranchOfficeCompan> update(@PathVariable("identificacion")Integer nic,@RequestBody BranchOfficeCompan branchOfficeCompan) {
+    public ResponseEntity<BranchOfficeCompan> update(@PathVariable("identificacion")BigInteger nic,@RequestBody BranchOfficeCompan branchOfficeCompan) {
 
         return new ResponseEntity<>(this.branchOfficeCompanService.update(nic,branchOfficeCompan),HttpStatus.OK);
 
@@ -62,7 +65,7 @@ public class BranchOfficeCompanRestController {
     @ApiOperation(value = "Eliminar Actividades", notes = "Servicio para eliminar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades eliminado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public void remove(@PathVariable("identificacion") int identificacion) {
+    public void remove(@PathVariable("identificacion") BigInteger identificacion) {
 
         BranchOfficeCompan branchOfficeCompan= this.branchOfficeCompanService.getById(identificacion);
         if ( branchOfficeCompan!= null) {

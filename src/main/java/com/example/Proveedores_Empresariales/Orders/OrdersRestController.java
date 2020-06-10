@@ -14,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/orders")
 @RestController
+@CrossOrigin
 public class OrdersRestController {
 
     private OrdersService ordersService;

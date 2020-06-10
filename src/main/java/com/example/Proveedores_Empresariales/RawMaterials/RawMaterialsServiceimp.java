@@ -1,5 +1,7 @@
 package com.example.Proveedores_Empresariales.RawMaterials;
 
+import com.example.Proveedores_Empresariales.BranchOfficeCompan.BranchOfficeCompan;
+import com.example.Proveedores_Empresariales.City.City;
 import com.example.Proveedores_Empresariales.Departament.Departament;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -47,5 +49,10 @@ public class RawMaterialsServiceimp implements RawMaterialsService {
     @Override
     public void delete(RawMaterials rawMaterials) {
         this.repositoryRawMaterials.delete(rawMaterials);
+    }
+
+    @Override
+    public RawMaterials getByName(String name) {
+        return this.repositoryRawMaterials.findCityByName(name);
     }
 }

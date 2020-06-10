@@ -14,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/orderinventory")
 @RestController
+@CrossOrigin
 public class OrderInventaryRestController {
 
     private OrderInventaryService orderInventaryService;

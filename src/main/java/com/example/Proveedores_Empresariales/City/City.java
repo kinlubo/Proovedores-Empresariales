@@ -16,7 +16,6 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
         @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.cityPK.id = :id"),
-        @NamedQuery(name = "City.findByCode", query = "SELECT c FROM City c WHERE c.code = :code"),
         @NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name"),
         @NamedQuery(name = "City.findByDepartamentId", query = "SELECT c FROM City c WHERE c.cityPK.departamentId = :departamentId")})
 public class City implements Serializable {
@@ -24,9 +23,6 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CityPK cityPK;
-    @Basic(optional = false)
-    @Column(name = "code")
-    private int code;
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -43,7 +39,6 @@ public class City implements Serializable {
 
     public City(CityPK cityPK, int code, String name) {
         this.cityPK = cityPK;
-        this.code = code;
         this.name = name;
     }
 
@@ -57,14 +52,6 @@ public class City implements Serializable {
 
     public void setCityPK(CityPK cityPK) {
         this.cityPK = cityPK;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 
     public String getName() {
