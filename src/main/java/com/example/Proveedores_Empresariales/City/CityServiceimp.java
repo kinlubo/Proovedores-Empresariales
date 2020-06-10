@@ -1,6 +1,7 @@
 package com.example.Proveedores_Empresariales.City;
 
 import com.example.Proveedores_Empresariales.Departament.Departament;
+import com.example.Proveedores_Empresariales.Departament.DepartmentService;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +11,25 @@ import java.util.List;
 public class CityServiceimp implements CityService {
 
     private RepositoryCity repositoryCity;
+    private DepartmentService departmentService;
 
-    public CityServiceimp(RepositoryCity repositoryCity) {
+    public CityServiceimp(RepositoryCity repositoryCity, DepartmentService departmentService) {
         this.repositoryCity = repositoryCity;
+        this.departmentService = departmentService;
     }
 
 
     @Override
     public City save(City city) {
+        Departament departament = null;
+            if (departmentService.getByName(city.getDepartament().getName())==null) {
+                departmentService.save(city.getDepartament());
+            }
+        departament = departmentService.getByName(city.getDepartament().getName());
+        int val = repositoryCity.findAll().size()+1;
+        CityPK cityPK = new CityPK(val,departament.getId());
+        city.setCityPK(cityPK);
+        city.setDepartament(departament);
         return this.repositoryCity.save(city);
     }
 

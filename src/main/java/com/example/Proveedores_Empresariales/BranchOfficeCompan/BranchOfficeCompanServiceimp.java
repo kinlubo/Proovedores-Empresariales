@@ -1,6 +1,9 @@
 package com.example.Proveedores_Empresariales.BranchOfficeCompan;
 
+import com.example.Proveedores_Empresariales.City.City;
 import com.example.Proveedores_Empresariales.City.CityService;
+import com.example.Proveedores_Empresariales.City.CityServiceimp;
+import com.example.Proveedores_Empresariales.Departament.Departament;
 import com.example.Proveedores_Empresariales.Departament.DepartmentService;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,32 +15,28 @@ import java.util.List;
 public class BranchOfficeCompanServiceimp implements BranchOfficeCompanService {
 
     private RepositoryBranchOfficeCompan repositoryBranchOfficeCompan;
-    private CityService cityService;
+    private CityServiceimp cityService;
     private DepartmentService departmentService;
 
     @Autowired
-    public BranchOfficeCompanServiceimp(RepositoryBranchOfficeCompan repositoryBranchOfficeCompan, CityService cityService, DepartmentService departmentService) {
+    public BranchOfficeCompanServiceimp(RepositoryBranchOfficeCompan repositoryBranchOfficeCompan, CityService cityService, CityServiceimp cityService1, DepartmentService departmentService) {
         this.repositoryBranchOfficeCompan = repositoryBranchOfficeCompan;
-        this.cityService = cityService;
+        this.cityService = cityService1;
         this.departmentService = departmentService;
     }
 
 
     @Override
     public BranchOfficeCompan save(BranchOfficeCompan branchOfficeCompan) {
+        Departament departament = null;
+        City city = null;
+            if (cityService.getByName(branchOfficeCompan.getCity().getName())==null) {
+                cityService.save(branchOfficeCompan.getCity());
+            }else{
+                city = cityService.getByName(branchOfficeCompan.getCity().getName());
+                branchOfficeCompan.setCity(city);
+            }
 
-        try {
-            departmentService.getByName(branchOfficeCompan.getCity().getDepartament().getName());
-        }
-        catch (ResourceNotFoundException error){
-            departmentService.save(branchOfficeCompan.getCity().getDepartament());
-        }
-        try {
-            cityService.getByName(branchOfficeCompan.getCity().getName());
-        }
-        catch (ResourceNotFoundException error){
-            cityService.save(branchOfficeCompan.getCity());
-        }
         return this.repositoryBranchOfficeCompan.save(branchOfficeCompan);
     }
 

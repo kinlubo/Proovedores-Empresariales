@@ -28,33 +28,6 @@ public class BranchOfficeCompanRestController {
         this.cityService = cityService;
     }
 
-    public Company companyId(Integer id)
-    {
-        Company company = null;
-        List<Company> companies = companyService.getAll();
-        for (int i = 0; companies.size()>i; i++)
-        {
-            if(companies.get(i).getNic()==id)
-            {
-                 company = companies.get(i);
-            }
-        }
-        return  company;
-    }
-
-    public City cityId(CityPK id)
-    {
-        City city = null;
-        List<City> cities = cityService.getAll();
-        for (int i = 0; cities.size()>i; i++)
-        {
-            if(cities.get(i).getCityPK()==id)
-            {
-                city = cities.get(i);
-            }
-        }
-        return  city;
-    }
 
     @PostMapping
     public ResponseEntity<BranchOfficeCompan> save(@RequestBody  BranchOfficeCompan branchOfficeCompan)
