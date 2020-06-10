@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -39,7 +40,7 @@ public class BranchOfficeCompan implements Serializable {
     private String name;
     @Basic(optional = false)
     @Column(name = "phone")
-    private int phone;
+    private BigInteger phone;
     @JoinColumns({
             @JoinColumn(name = "departament_id", referencedColumnName = "departament_id"),
             @JoinColumn(name = "city_id", referencedColumnName = "id")})
@@ -60,7 +61,7 @@ public class BranchOfficeCompan implements Serializable {
         this.nic = nic;
     }
 
-    public BranchOfficeCompan(Integer nic, String direction, String email, String name, int phone) {
+    public BranchOfficeCompan(Integer nic, String direction, String email, String name, BigInteger phone) {
         this.nic = nic;
         this.direction = direction;
         this.email = email;
@@ -100,11 +101,11 @@ public class BranchOfficeCompan implements Serializable {
         this.name = name;
     }
 
-    public int getPhone() {
+    public BigInteger getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(BigInteger phone) {
         this.phone = phone;
     }
 

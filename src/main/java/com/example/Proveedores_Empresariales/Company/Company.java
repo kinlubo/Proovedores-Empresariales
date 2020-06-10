@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 
 @Entity
 @Table(catalog = "proveedores", schema = "public")
@@ -23,7 +24,7 @@ public class Company implements Serializable {
     @Basic(optional = false)
     private String email;
     @Basic(optional = false)
-    private int phone;
+    private BigInteger phone;
     @Basic(optional = false)
     private String direction;
 }
