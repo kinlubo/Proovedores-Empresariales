@@ -29,7 +29,7 @@ public class ProductService implements Serializable {
     private int value;
     @Basic(optional = true)
     @Column(name = "unit_measure",nullable = true)
-    private int unitMeasure;
+    private String unitMeasure;
     @JoinColumn(name = "service_id",nullable = true,updatable = true)
     @OneToOne(optional = true)
     private Service service;

@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface RepositoryRawMaterials extends JpaRepository<RawMaterials,Integer> {
     @Query("Select c from RawMaterials c where UPPER(c.name) like UPPER(:name)")
-    public RawMaterials findCityByName(@Param("name")String name);
+    public RawMaterials findRawMaterialsByName(@Param("name")String name);
 }

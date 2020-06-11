@@ -1,6 +1,7 @@
 package com.example.Proveedores_Empresariales.OrdersPurchase;
 
-import com.example.Proveedores_Empresariales.Departament.Departament;
+import com.example.Proveedores_Empresariales.DetailOrdersPurchase.DetailOrdersPurchase;
+import com.example.Proveedores_Empresariales.DetailOrdersPurchase.RepositoryDetailOrdersPurchase;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import java.util.List;
 public class OrdersPurchaseServiceimp implements OrdersPurchaseService {
 
     private RepositoryOrdersPurchase repositoryOrdersPurchase;
+    private RepositoryDetailOrdersPurchase repositoryDetailOrdersPurchase;
 
-    public OrdersPurchaseServiceimp(RepositoryOrdersPurchase repositoryDepartment) {
+    public OrdersPurchaseServiceimp(RepositoryOrdersPurchase repositoryDepartment, RepositoryDetailOrdersPurchase repositoryDetailOrdersPurchase) {
         this.repositoryOrdersPurchase = repositoryDepartment;
+        this.repositoryDetailOrdersPurchase = repositoryDetailOrdersPurchase;
     }
 
 
@@ -44,6 +47,15 @@ public class OrdersPurchaseServiceimp implements OrdersPurchaseService {
 
     @Override
     public void delete(OrdersPurchase ordersPurchase) {
+
+        List<DetailOrdersPurchase> detailOrdersPurchase = repositoryDetailOrdersPurchase.findAll();
+        for (int i = 0; detailOrdersPurchase.size()>i;i++)
+        {
+            if (detailOrdersPurchase.get(i).getOrdersPurchase()==ordersPurchase)
+            {
+                this.repositoryDetailOrdersPurchase.delete(detailOrdersPurchase.get(i));
+            }
+        }
         this.repositoryOrdersPurchase.delete(ordersPurchase);
     }
 }

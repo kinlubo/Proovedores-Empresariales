@@ -53,6 +53,6 @@ public class RawMaterialsServiceimp implements RawMaterialsService {
 
     @Override
     public RawMaterials getByName(String name) {
-        return this.repositoryRawMaterials.findCityByName(name);
+        return this.repositoryRawMaterials.findRawMaterialsByName(name);
     }
 }

@@ -24,7 +24,7 @@ public class Company implements Serializable {
     @Basic(optional = false)
     private String email;
     @Basic(optional = false)
-    private BigInteger phone;
+    private String phone;
     @Basic(optional = false)
     private String direction;
 }

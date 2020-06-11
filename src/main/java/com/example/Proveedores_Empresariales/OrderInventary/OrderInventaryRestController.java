@@ -1,15 +1,12 @@
 package com.example.Proveedores_Empresariales.OrderInventary;
 
-import com.example.Proveedores_Empresariales.Departament.Departament;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.models.auth.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @RequestMapping("api/v1/orderinventory")
@@ -19,8 +16,9 @@ public class OrderInventaryRestController {
 
     private OrderInventaryService orderInventaryService;
 
-
-
+    public OrderInventaryRestController(OrderInventaryService orderInventaryService) {
+        this.orderInventaryService = orderInventaryService;
+    }
 
     @PostMapping
     public ResponseEntity<OrderInventory> save(@RequestBody OrderInventory orderInventory )

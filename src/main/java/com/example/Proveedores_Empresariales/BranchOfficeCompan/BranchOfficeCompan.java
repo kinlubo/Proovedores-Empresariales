@@ -40,7 +40,7 @@ public class BranchOfficeCompan implements Serializable {
     private String name;
     @Basic(optional = false)
     @Column(name = "phone")
-    private BigInteger phone;
+    private String phone;
     @JoinColumns({
             @JoinColumn(name = "departament_id", referencedColumnName = "departament_id"),
             @JoinColumn(name = "city_id", referencedColumnName = "id")})
@@ -61,7 +61,7 @@ public class BranchOfficeCompan implements Serializable {
         this.nic = nic;
     }
 
-    public BranchOfficeCompan(BigInteger nic, String direction, String email, String name, BigInteger phone) {
+    public BranchOfficeCompan(BigInteger nic, String direction, String email, String name, String phone) {
         this.nic = nic;
         this.direction = direction;
         this.email = email;
@@ -101,11 +101,11 @@ public class BranchOfficeCompan implements Serializable {
         this.name = name;
     }
 
-    public BigInteger getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(BigInteger phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
