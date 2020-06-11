@@ -33,10 +33,8 @@ public class ProductServiceServiceimp implements ProductServiceService {
     public ProductService save(ProductService productService) {
             repositoryProduct.save(productService.getProduct());
             repositoryService.save(productService.getService());
-        List<RawMaterials> rawMaterials = rawMaterialsService.getAll();
-            if(rawMaterialsService.getByName(productService.getName())==null)
-            {
-                ProductService_RawMaterialPK productService_rawMaterialPK =  new ProductService_RawMaterialPK(productService.getId(),rawMaterialsService.getByName(productService.getName()).getCode());
+            if(rawMaterialsService.getByName(productService.getName())!=null) {
+                ProductService_RawMaterialPK productService_rawMaterialPK = new ProductService_RawMaterialPK(productService.getId(), rawMaterialsService.getByName(productService.getName()).getCode());
                 ProductService_RawMaterial productService_rawMaterial = new ProductService_RawMaterial(productService_rawMaterialPK);
                 productService_rawMaterialService.save(productService_rawMaterial);
             }
