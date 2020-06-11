@@ -4,6 +4,7 @@ import com.example.Proveedores_Empresariales.City.City;
 import com.example.Proveedores_Empresariales.serviceException.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -26,12 +27,12 @@ public class CompanyServiceimp implements CompanyService {
     }
 
     @Override
-    public Company getById(int id) {
+    public Company getById(BigInteger id) {
         return this.repositoryCompany.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country identified by :"+id+" . Not found"));
     }
 
     @Override
-    public Company update( int nic, Company company) {
+    public Company update( BigInteger nic, Company company) {
         Company company1 = getById(nic);
         company1.setName(company.getName());
         company1.setEmail(company.getEmail());

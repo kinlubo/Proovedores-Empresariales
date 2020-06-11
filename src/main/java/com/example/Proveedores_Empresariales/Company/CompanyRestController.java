@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class CompanyRestController {
     }
 
     @GetMapping ( path = "/{id}")
-    public ResponseEntity<Company>getById(@PathVariable("id") int id)
+    public ResponseEntity<Company>getById(@PathVariable("id") BigInteger id)
     {
         return ResponseEntity.ok().body(this.companyService.getById(id));
     }
@@ -46,7 +47,7 @@ public class CompanyRestController {
     @ApiOperation(value = "Actualizar Actividades", notes = "Servicio para actualizar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades actualizado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public ResponseEntity<Company> update(@PathVariable("identificacion") Integer nic,@RequestBody Company company)
+    public ResponseEntity<Company> update(@PathVariable("identificacion") BigInteger nic,@RequestBody Company company)
     {
         return new ResponseEntity<>(this.companyService.update(nic,company), HttpStatus.OK);
 
@@ -56,7 +57,7 @@ public class CompanyRestController {
     @ApiOperation(value = "Eliminar Actividades", notes = "Servicio para eliminar un Actividades")
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Actividades eliminado correctamente"),
             @ApiResponse(code = 404, message = "Programa no encontrado") })
-    public void remove(@PathVariable("identificacion") int nic) {
+    public void remove(@PathVariable("identificacion") BigInteger nic) {
 
         Company company= this.companyService.getById(nic);
         if ( company!= null) {

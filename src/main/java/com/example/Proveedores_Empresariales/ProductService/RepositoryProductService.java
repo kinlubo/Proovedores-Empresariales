@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RepositoryProductService extends JpaRepository<ProductService,Integer> {
-    @Query("Select c  from ProductService c where  c.name like %:name% ")
+    @Query("Select c  from ProductService c where  upper( c.name) like upper(:name) ")
     public List findFInd(@Param("name") String name);
 }
