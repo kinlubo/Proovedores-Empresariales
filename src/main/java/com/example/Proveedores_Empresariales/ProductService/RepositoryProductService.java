@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RepositoryProductService extends JpaRepository<ProductService,Integer> {
-    @Query("Select c , p.nic ,p.name from ProductService c, BranchOfficeCompan p where  c.branchOfficeCompan = p.nic and c.name like %:name% ")
+    @Query("Select c from ProductService c, BranchOfficeCompan p where  c.branchOfficeCompan = p.nic and c.name like %:name% ")
     public List findFInd(@Param("name") String name);
 }
